@@ -1,0 +1,25 @@
+Remove OS files:
+.DS_Store
+.DS_Store?
+._*
+.sass-cache
+Thumbs.db
+
+#Remove miscellaneous:
+.idea/
+.vscode/
+.htaccess
+
+#Remove node modules:
+/node_modules/*
+
+#/Remove typings:
+/typings/*
+
+#Remove build file:
+/src/dist/*
+
+
+
+#Remove libs files:
+/public/libs/*

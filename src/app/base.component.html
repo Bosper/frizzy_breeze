@@ -1,0 +1,7 @@
+<h1>Base Component</h1>
+<ul>
+    <li *ngFor="let item of albums" (click)="dope(item)">{{ item.title }}</li>
+</ul>
+<button type="text" (click)="logAlbums()">GET Albums</button>
+<button type="text" (click)="logPhotos()">GET Photos</button>
+<button type="text" (click)="getPhotos( albums )">GET Photos</button>
