@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 import { AppService } from './app.service';
 
@@ -7,22 +8,15 @@ import { Photo } from './photo.class';
 
 @Component({
   selector: 'my-app',
-  template: `
-  <h1>Base Component</h1>
-<ul>
-    <li *ngFor="let item of albums" (click)="dope(item)">{{ item.title }}</li>
-</ul>
-<button type="text" (click)="logAlbums()">GET Albums</button>
-<button type="text" (click)="logPhotos()">GET Photos</button>
-<button type="text" (click)="getPhotos( albums )">GET Photos</button>
-  `
+  templateUrl : `./src/app/base.component.html` 
 })
 
 export class BaseComponent implements OnInit {
-  constructor(private appService: AppService) { }
+  constructor(private appService: AppService, private router: Router) { }
 
   albums: Album[];
   photos: Photo[];
+  activePhotos: any;
   error: any;
 
   getAlbums() {
@@ -37,17 +31,25 @@ export class BaseComponent implements OnInit {
       .catch(error => this.error = error)
   }
 
+  goDetail(album: Album) {
+    this.router.navigate([ '/story', album.id ])
+  }
+
+  getAlbumPhotos(albumPhotosId: number[]) {
+    console.log(albumPhotosId);
+    this.appService.getAlbumPhotos( albumPhotosId )
+      .then( activePhotos => {this.activePhotos = activePhotos; console.log(activePhotos);
+      } )
+      .catch(error => this.error = error)
+    
+  }
+
   logAlbums() {
     console.log(this.albums);
   }
 
   logPhotos() {
     console.log(this.photos);
-  }
-
-
-  dope(item: any) {
-    console.log(item);
   }
 
   ngOnInit() {

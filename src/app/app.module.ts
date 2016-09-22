@@ -9,8 +9,9 @@ import { InMemoryData }  from './in-memory-data';
 import { routing } from './app.routing';
 import { AppService } from './app.service';
 
-import { BaseComponent } from './base.component';
 import { RootComponent } from './root.component';
+import { BaseComponent } from './base.component';
+import { DetailComponent } from './detail.component';
 
 @NgModule({
     imports: [
@@ -20,7 +21,7 @@ import { RootComponent } from './root.component';
         InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
-    declarations: [BaseComponent, RootComponent],
+    declarations: [RootComponent, BaseComponent, DetailComponent],
     providers: [AppService],
     bootstrap: [RootComponent]
 })

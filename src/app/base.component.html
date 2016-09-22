@@ -1,7 +1,16 @@
 <h1>Base Component</h1>
 <ul>
-    <li *ngFor="let item of albums" (click)="dope(item)">{{ item.title }}</li>
+    <li *ngFor="let album of albums" (click)="goDetail(album)">
+        <span>{{ album.title }}</span>
+    </li>
 </ul>
+
+<div *ngIf="activePhotos">
+    <span *ngFor="let photo of activePhotos">{{ photo.url }}</span>
+</div>
+
 <button type="text" (click)="logAlbums()">GET Albums</button>
 <button type="text" (click)="logPhotos()">GET Photos</button>
-<button type="text" (click)="getPhotos( albums )">GET Photos</button>
+
+
+<!--getAlbumPhotos(album.photoId)-->
