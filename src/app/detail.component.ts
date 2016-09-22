@@ -24,8 +24,8 @@ export class DetailComponent implements OnInit {
     getAlbumPhotos(albumPhotosId: number[]) {
     console.log(albumPhotosId);
     this.appService.getAlbumPhotos( albumPhotosId )
-      .then( activePhotos => {this.activePhotos = activePhotos; console.log(activePhotos);
-      } )
+      .then( activePhotos => { this.activePhotos = activePhotos; console.log(activePhotos);
+      })
       .catch(error => this.error = error)
     
   }

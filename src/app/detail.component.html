@@ -1,7 +1,7 @@
 <h1>Detail Component</h1>
 <div *ngIf="album">
+    <span>{{ album.title }}</span>
     <div *ngFor="let photo of activePhotos">
         <span>{{ photo.url }}</span>
     </div>
 </div>
-<span *ngIf="album" >{{ album.id }}</span>
