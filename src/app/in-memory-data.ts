@@ -1,17 +1,19 @@
 import { InMemoryDbService } from 'angular2-in-memory-web-api';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
+import { AlbumCategory } from './category.class';
 
 export class InMemoryData implements InMemoryDbService {
+
     createDb() {
-        let albums:Album[] = [
-            { id: 1, title: "Editorial", photoId: [1, 2, 3], start: true },
-            { id: 2, title: "Advertisment", photoId: [7], start: true },
-            { id: 3, title: "Nude", photoId: [5, 6], start: true },
-            { id: 4, title: "Personal", photoId: [1, 4, 2], start: true },
-            { id: 4, title: "Vision", photoId: [5, 3], start: false },
-            { id: 4, title: "Places", photoId: [2, 7], start: true },
-            { id: 4, title: "Portrait", photoId: [5, 3], start: false }
+        let albums: Album[] = [
+            { id: 1, title: "Editorial", photoId: [1, 2, 3], start: true, category: 1 },
+            { id: 2, title: "Advertisment", photoId: [7], start: true, category: 2 },
+            { id: 3, title: "Nude", photoId: [5, 6], start: true, category: 1 },
+            { id: 4, title: "Personal", photoId: [1, 4, 2], start: true, category: 2 },
+            { id: 4, title: "Vision", photoId: [5, 3], start: false, category: 1 },
+            { id: 4, title: "Places", photoId: [2, 7], start: true, category: 2 },
+            { id: 4, title: "Portrait", photoId: [5, 3], start: false, category: 1 }
         ];
 
         let photos: Photo[] = [
@@ -24,6 +26,11 @@ export class InMemoryData implements InMemoryDbService {
             { id: 7, order: 7, active: true, url: "Numer siedem" }
         ];
 
-        return { albums, photos }
+        let categories: AlbumCategory[] = [
+            { id: 1, title: "Portraits" },
+            { id: 2, title: "Editorial" }
+        ]
+
+        return { albums, photos, categories }
     }
 }

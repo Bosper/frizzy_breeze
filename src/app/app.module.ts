@@ -12,6 +12,7 @@ import { AppService } from './app.service';
 import { RootComponent } from './root.component';
 import { BaseComponent } from './base.component';
 import { DetailComponent } from './detail.component';
+import { CategoryComponent } from './category.component';
 import { AboutComponent } from './about.component';
 import { SocialComponent } from './social.component';
 
@@ -23,7 +24,7 @@ import { SocialComponent } from './social.component';
         InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
-    declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, SocialComponent],
+    declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, CategoryComponent, SocialComponent],
     providers: [AppService, SocialComponent],
     bootstrap: [RootComponent]
 })

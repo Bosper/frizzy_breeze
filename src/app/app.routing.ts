@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { BaseComponent } from './base.component';
 import { DetailComponent } from './detail.component';
 import { AboutComponent } from './about.component';
+import { CategoryComponent } from './category.component';
 
 
 const appRoutes: Routes = [
@@ -25,8 +26,8 @@ const appRoutes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'portraits',
-        component: AboutComponent
+        path: 'category/:category',
+        component: CategoryComponent
     }
 ]
 
