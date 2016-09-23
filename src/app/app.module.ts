@@ -24,7 +24,7 @@ import { SocialComponent } from './social.component';
         routing
     ],
     declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, SocialComponent],
-    providers: [AppService],
+    providers: [AppService, SocialComponent],
     bootstrap: [RootComponent]
 })
 export class AppModule { }

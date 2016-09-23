@@ -1,12 +1,9 @@
 import { Component } from '@angular/core';
+import { SocialComponent } from './social.component';
 
 @Component({
     selector: 'app',
-    template: `
-   <h1>{{title}}</h1>
-   <a routerLink="/">lounge exposure</a><a routerLink="/about-me">about me</a>
-   <router-outlet></router-outlet>
- `
+    templateUrl : './src/app/root.component.html'
 })
 
 export class RootComponent {

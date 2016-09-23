@@ -5,19 +5,18 @@ import { AppService } from './app.service';
 
 import { Album } from './album.class';
 import { Photo } from './photo.class';
-import { Vocabulary } from './app.vocabulary'
-
-import { SocialComponent } from './social.component'
+import { Vocabulary } from './app.vocabulary';
 
 @Component({
-  selector: 'my-app',
-  providers: [ Vocabulary, SocialComponent ], 
+  selector: 'main',
+  providers: [ Vocabulary ], 
   templateUrl : `./src/app/base.component.html` 
 })
 
 export class BaseComponent implements OnInit {
   constructor(private appService: AppService, private router: Router, private vocabulary: Vocabulary) { }
 
+  activeAlbums: Album[]
   albums: Album[];
   photos: Photo[];
   activePhotos: any;
@@ -30,6 +29,12 @@ export class BaseComponent implements OnInit {
       .catch(error => this.error = error)
   }
 
+  getStartAlbums() {
+    return this.appService.getStartAlbums()
+    .then( album => this.activeAlbums = album )
+    .catch(error => this.error = error)
+  }
+
   getPhotos() {
     return this.appService.getPhotos()
       .then(result => this.photos = result)
@@ -39,15 +44,6 @@ export class BaseComponent implements OnInit {
   goDetail(album: Album) {
     this.router.navigate([ '/story', album.id ])
   }
-
-  // getAlbumPhotos(albumPhotosId: number[]) {
-  //   console.log(albumPhotosId);
-  //   this.appService.getAlbumPhotos( albumPhotosId )
-  //     .then( activePhotos => {this.activePhotos = activePhotos; console.log(activePhotos);
-  //     } )
-  //     .catch(error => this.error = error)
-    
-  // }
 
   logAlbums() {
     console.log(this.albums);
@@ -60,5 +56,6 @@ export class BaseComponent implements OnInit {
   ngOnInit() {
     this.getAlbums();
     this.getPhotos();
+    this.getStartAlbums();
   }
 }

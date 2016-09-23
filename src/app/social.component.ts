@@ -7,8 +7,10 @@ import { Component, OnInit, Input } from '@angular/core';
 export class SocialComponent implements OnInit {
     constructor() { }
 
-    @Input() share:any;
+    share: any = 'test';
 
-    ngOnInit() { }
+    ngOnInit() {
+        
+    }
 
 }
