@@ -26,7 +26,7 @@ const appRoutes: Routes = [
         component: AboutComponent
     },
     {
-        path: 'category/:category',
+        path: ':category/:id',
         component: CategoryComponent
     }
 ]

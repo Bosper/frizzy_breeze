@@ -2,6 +2,7 @@ import { InMemoryDbService } from 'angular2-in-memory-web-api';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 import { AlbumCategory } from './category.class';
+import { Navigation } from './navigation.class'
 
 export class InMemoryData implements InMemoryDbService {
 
@@ -29,8 +30,13 @@ export class InMemoryData implements InMemoryDbService {
         let categories: AlbumCategory[] = [
             { id: 1, title: "Portraits" },
             { id: 2, title: "Editorial" }
+        ];
+
+        let navigation: Navigation[] = [
+            { id: 1, title: "portrait", url: "/portrait", active: false, display: true, category: 1 },
+            { id: 2, title: "editorial", url: "/editorial", active: false, display: true, category: 2 },
         ]
 
-        return { albums, photos, categories }
+        return { albums, photos, categories, navigation }
     }
 }

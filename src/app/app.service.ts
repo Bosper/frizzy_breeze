@@ -3,6 +3,7 @@ import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
 import { Album } from './album.class';
 import { Photo } from './photo.class';
+import { Navigation } from './navigation.class';
 
 @Injectable()
 export class AppService {
@@ -10,6 +11,15 @@ export class AppService {
 
     private albumUrl = "app/albums";
     private photoUrl = "app/photos";
+    private navUrl = "app/navigation";
+
+    getNavigation(): Promise<Navigation[]>  {
+        return this.http
+            .get( this.navUrl )
+            .toPromise()
+            .then( (res: Response) => res.json().data )
+            .catch(this.handleError);
+    }
 
     getAlbums(): Promise<Album[]> {
         return this.http
@@ -36,6 +46,12 @@ export class AppService {
     getAlbum(id: number) {
         return this.getAlbums()
             .then(albums => albums.find(album => album.id === id))
+            .catch(this.handleError);
+    }
+
+    getCategoryAlbums(id: number) {
+        return this.getAlbums()
+            .then( albums => albums.filter( categoryAlbums => categoryAlbums.category === id ) )
             .catch(this.handleError);
     }
 

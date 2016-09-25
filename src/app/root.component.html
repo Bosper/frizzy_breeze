@@ -1,7 +1,7 @@
 <h1><a routerLink="/">{{title}}</a></h1>
 <nav>
-    <a routerLink="/portraits">portraits</a>
-    <a routerLink="/about-me">about me</a>
+    <a *ngFor="let nav of navigation" routerLink="{{ nav.url }}/{{ nav.id }}">{{ nav.title }}</a>
+    <a routerLink="/about-me">about-me</a>
 </nav>
 
 <router-outlet></router-outlet>

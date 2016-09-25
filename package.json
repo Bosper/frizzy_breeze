@@ -1,5 +1,5 @@
 {
-  "name": "hero_rc6_webpack",
+  "name": "frizzy_breeze",
   "version": "1.0.0",
   "description": "A webpack starter for angular 2",
   "scripts": {
@@ -54,5 +54,6 @@
     "webpack": "^1.13.0",
     "webpack-dev-server": "^1.14.1",
     "webpack-merge": "^0.14.0"
-  }
+  },
+  "repository": "https://github.com/Bosper/Frizzy_Breeze.git"
 }

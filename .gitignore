@@ -9,6 +9,7 @@ Thumbs.db
 .idea/
 .vscode/
 .htaccess
+.typingsrc
 
 #Remove node modules:
 /node_modules/*
@@ -18,8 +19,6 @@ Thumbs.db
 
 #Remove build file:
 /src/dist/*
-
-
 
 #Remove libs files:
 /public/libs/*
