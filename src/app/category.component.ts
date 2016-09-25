@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppService } from './app.service';
 
@@ -10,11 +10,15 @@ import { Album } from './album.class';
     templateUrl: 'category.component.html'
 })
 export class CategoryComponent implements OnInit {
-    constructor( private appService: AppService, private route: ActivatedRoute ) { }
+    constructor( private appService: AppService, private route: ActivatedRoute, private router: Router ) { }
 
     sub: any;
     error: any;
     categoryAlbums: Album[];
+
+    goDetail(album: Album) {
+        this.router.navigate([ '/story', album.id ]);
+    }
 
     ngOnInit() {
         this.sub = this.route.params.subscribe(
