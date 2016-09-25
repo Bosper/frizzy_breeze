@@ -5,6 +5,7 @@ import { BaseComponent } from './base.component';
 import { DetailComponent } from './detail.component';
 import { AboutComponent } from './about.component';
 import { CategoryComponent } from './category.component';
+import { DashboardComponent } from './dashboard.component';
 
 
 const appRoutes: Routes = [
@@ -28,6 +29,10 @@ const appRoutes: Routes = [
     {
         path: ':category/:id',
         component: CategoryComponent
+    },
+    {
+        path: 'dashboard',
+        component: DashboardComponent
     }
 ]
 

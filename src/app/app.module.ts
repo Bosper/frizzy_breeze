@@ -15,6 +15,7 @@ import { DetailComponent } from './detail.component';
 import { CategoryComponent } from './category.component';
 import { AboutComponent } from './about.component';
 import { SocialComponent } from './social.component';
+import { DashboardComponent } from './dashboard.component';
 
 @NgModule({
     imports: [
@@ -24,7 +25,7 @@ import { SocialComponent } from './social.component';
         InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
-    declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, CategoryComponent, SocialComponent],
+    declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, CategoryComponent, SocialComponent, DashboardComponent],
     providers: [AppService, SocialComponent],
     bootstrap: [RootComponent]
 })
