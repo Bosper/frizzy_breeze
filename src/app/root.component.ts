@@ -8,7 +8,7 @@ import { SocialComponent } from './social.component';
 
 @Component({
     selector: 'app',
-    templateUrl : './src/app/root.component.html'
+    template : require('./root.component.html')
 })
 
 export class RootComponent implements OnInit {

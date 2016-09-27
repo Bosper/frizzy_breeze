@@ -7,7 +7,7 @@ import { Photo } from './photo.class';
 
 @Component({
     selector: 'album',
-    templateUrl : `./src/app/detail.component.html` 
+    template : require('./detail.component.html')
 })
 
 export class DetailComponent implements OnInit {

@@ -10,7 +10,7 @@ import { Vocabulary } from './app.vocabulary';
 @Component({
   selector: 'main',
   providers: [ Vocabulary ], 
-  templateUrl : `./src/app/base.component.html` 
+  template : require('./base.component.html') 
 })
 
 export class BaseComponent implements OnInit {

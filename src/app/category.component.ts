@@ -7,7 +7,7 @@ import { Album } from './album.class';
 
 @Component({
     selector: 'category',
-    templateUrl: 'category.component.html'
+    template : require('./category.component.html')
 })
 export class CategoryComponent implements OnInit {
     constructor( private appService: AppService, private route: ActivatedRoute, private router: Router ) { }
