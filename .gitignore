@@ -18,7 +18,7 @@ Thumbs.db
 /typings/*
 
 #Remove build file:
-/src/dist/*
+/dist/*
 
 #Remove libs files:
 /public/libs/*
