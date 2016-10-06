@@ -17,6 +17,8 @@ import { AboutComponent } from './about.component';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 
+import { OrderByPipe } from '../pipes/sort.pipe';
+
 @NgModule({
     imports: [
         BrowserModule,
@@ -25,7 +27,18 @@ import { DashboardComponent } from './dashboard.component';
         InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
-    declarations: [RootComponent, BaseComponent, DetailComponent, AboutComponent, CategoryComponent, SocialComponent, DashboardComponent],
+    declarations: [
+        //Components
+        RootComponent, 
+        BaseComponent, 
+        DetailComponent, 
+        AboutComponent, 
+        CategoryComponent, 
+        SocialComponent, 
+        DashboardComponent,
+        //Pipes
+        OrderByPipe
+        ],
     providers: [AppService, SocialComponent],
     bootstrap: [RootComponent]
 })

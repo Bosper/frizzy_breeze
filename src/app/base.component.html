@@ -1,9 +1,19 @@
 <h1>Base Component</h1>
+<div *ngIf="activeAlbums != null">
 <ul>
-    <li *ngFor="let album of activeAlbums" (click)="goDetail(album)">
-        <span>{{ album.title }}</span>
+    <li *ngFor="let album of activeAlbums | orderBy: ['activeAlbums']" (click)="goDetail(album)">
+        <span>{{ album.title | uppercase}}</span>
+        <span>{{ album.desc }}</span>
     </li>
 </ul>
+</div>
 
 <button type="text" (click)="logAlbums()">GET Albums</button>
 <button type="text" (click)="logPhotos()">GET Photos</button>
+<button type="text" (click)="logBaaS()">TEST API</button>
+
+<div *ngIf="test">
+    <div *ngFor="let item of test">
+        {{ item.name }}
+    </div>
+</div>

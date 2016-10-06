@@ -8,13 +8,13 @@ export class InMemoryData implements InMemoryDbService {
 
     createDb() {
         let albums: Album[] = [
-            { id: 1, title: "Editorial", photoId: [1, 2, 3], start: true, category: 1 },
-            { id: 2, title: "Advertisment", photoId: [7], start: true, category: 2 },
-            { id: 3, title: "Nude", photoId: [5, 6], start: true, category: 1 },
-            { id: 4, title: "Personal", photoId: [1, 4, 2], start: true, category: 2 },
-            { id: 4, title: "Vision", photoId: [5, 3], start: false, category: 1 },
-            { id: 4, title: "Places", photoId: [2, 7], start: true, category: 2 },
-            { id: 4, title: "Portrait", photoId: [5, 3], start: false, category: 1 }
+            { id: 1, title: "Lazure Coast", photoId: [1, 2, 3], start: true, category: 1, desc: "Lorem Ipsum dolor sit amet", order: 7 },
+            { id: 2, title: "Dark Inside", photoId: [7], start: true, category: 2, desc: "Consectetur adipiscing elit", order: 6 },
+            { id: 3, title: "Powerfull", photoId: [5, 6], start: true, category: 1, desc: "Sed do eiusmod tempor", order: 5 },
+            { id: 4, title: "On the Sea", photoId: [1, 4, 2], start: true, category: 2, desc: "Incididunt ut labore et dolore", order: 4 },
+            { id: 5, title: "Memories of Past", photoId: [5, 3], start: false, category: 1, desc: "Ut enim ad minim veniam", order: 3 },
+            { id: 6, title: "Far Away", photoId: [2, 7], start: true, category: 2, desc: "Quis nostrud exercitation ullamco", order: 2 },
+            { id: 7, title: "Greek Demigod", photoId: [5, 3], start: false, category: 1, desc: "Laboris nisi ut aliquip ex ea commodo", order: 1 }
         ];
 
         let photos: Photo[] = [

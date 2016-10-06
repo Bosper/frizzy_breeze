@@ -1,4 +1,4 @@
 <h1>Category Component</h1>
 <ul>
-    <li *ngFor="let album of categoryAlbums" (click)="goDetail(album)">{{ album.title }}</li>
+    <li *ngFor="let album of categoryAlbums" (click)="goDetail(album)">{{ album.title }}{{ album.desc }}</li>
 </ul>

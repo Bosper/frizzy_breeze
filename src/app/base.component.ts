@@ -6,6 +6,7 @@ import { AppService } from './app.service';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 import { Vocabulary } from './app.vocabulary';
+import { Test } from './test.class';
 
 @Component({
   selector: 'main',
@@ -16,12 +17,25 @@ import { Vocabulary } from './app.vocabulary';
 export class BaseComponent implements OnInit {
   constructor(private appService: AppService, private router: Router, private vocabulary: Vocabulary) { }
 
-  activeAlbums: Album[]
+  activeAlbums: Album[];
   albums: Album[];
   photos: Photo[];
   activePhotos: any;
   error: any;
   public share: any = 'test';
+  test: Test[];
+
+  logBaaS() {
+    return this.appService.getTest() 
+      .then(result => this.test = result)
+      .catch(error => this.error = error)
+  }
+
+  // logBaaS() {
+  //   return this.appService.getTest()
+  //     .subscribe( result => {this.test = result; console.log(result, this.test);
+  //     } )
+  // }
 
   getAlbums() {
     return this.appService.getAlbums()

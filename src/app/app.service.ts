@@ -1,17 +1,40 @@
 import { Injectable } from '@angular/core';
 import { Headers, Http, RequestOptions, Response } from '@angular/http';
 
+import { Observable } from 'rxjs';
+
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 import { Navigation } from './navigation.class';
 
+import 'rxjs/add/operator/map';
+
+import { Test } from './test.class';
+
 @Injectable()
 export class AppService {
-    constructor(private http: Http) { }
+    constructor(private http: Http) {}
 
     private albumUrl = "app/albums";
     private photoUrl = "app/photos";
     private navUrl = "app/navigation";
+
+    private newPhotoUrl = "http://127.0.0.1:3000/test";
+
+    getTest(): Promise<Test[]> {
+        return this.http
+            .get( this.newPhotoUrl )
+            .toPromise()
+            .then( (res:Response) => res.json() as Test[] )
+            .catch(this.handleError);
+    }
+
+    // getTest(): Observable<Test[]> {
+    //     return this.http
+    //         .get( this.newPhotoUrl )
+    //         .map( (res:Response) => res.json().data )
+    //         .catch(this.handleError);
+    // }
 
     getNavigation(): Promise<Navigation[]>  {
         return this.http
