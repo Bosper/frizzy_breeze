@@ -5,8 +5,15 @@ import { Component, OnInit } from '@angular/core';
     template : require('./dashboard.component.html')
 })
 export class DashboardComponent implements OnInit {
-    constructor() { }
+    date: Date;
+    isLogged: boolean;
 
-    ngOnInit() { }
+    constructor() {
+        this.date = new Date();
+        this.isLogged = false;
+    }
+    
+    ngOnInit() {
+    }
 
 }

@@ -1,6 +1,6 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule }    from '@angular/forms';
+import { FormsModule, ReactiveFormsModule }    from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
@@ -16,6 +16,8 @@ import { CategoryComponent } from './category.component';
 import { AboutComponent } from './about.component';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
+import { LoginComponent } from './login.component';
+import { PanelComponent } from './panel.component';
 
 import { OrderByPipe } from '../pipes/sort.pipe';
 
@@ -23,8 +25,9 @@ import { OrderByPipe } from '../pipes/sort.pipe';
     imports: [
         BrowserModule,
         FormsModule,
+        ReactiveFormsModule,
         HttpModule,
-        InMemoryWebApiModule.forRoot(InMemoryData),
+        //InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
     declarations: [
@@ -36,6 +39,8 @@ import { OrderByPipe } from '../pipes/sort.pipe';
         CategoryComponent, 
         SocialComponent, 
         DashboardComponent,
+        LoginComponent,
+        PanelComponent,
         //Pipes
         OrderByPipe
         ],

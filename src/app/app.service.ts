@@ -20,6 +20,9 @@ export class AppService {
     private navUrl = "app/navigation";
 
     private newPhotoUrl = "http://127.0.0.1:3000/test";
+    private signInUrl = "http://127.0.0.1:3005/login";
+
+    access: boolean = false;
 
     getTest(): Promise<Test[]> {
         return this.http
@@ -62,7 +65,7 @@ export class AppService {
 
     getStartAlbums() {
         return this.getAlbums()
-            .then( (albums) => albums.filter( album => album.start === true ))
+            .then( (albums) => albums.filter( startAlbum => startAlbum.start === true && startAlbum.active === true ))
             .catch(this.handleError);
     }
 
@@ -74,7 +77,7 @@ export class AppService {
 
     getCategoryAlbums(id: number) {
         return this.getAlbums()
-            .then( albums => albums.filter( categoryAlbums => categoryAlbums.category === id ) )
+            .then( albums => albums.filter( categoryAlbums => categoryAlbums.category === id && categoryAlbums.active === true ) )
             .catch(this.handleError);
     }
 
@@ -90,6 +93,14 @@ export class AppService {
                 console.log(albumPhotosId, photos, activePhotos);
                 return activePhotos;
             })
+    }
+
+    signIn(username: string, password: string) {
+        console.log("service: ", username, password);
+        return this.http
+            .post( this.signInUrl, JSON.stringify({ username: username, password: password }) )
+            .subscribe( (res:Response) => {console.log(res);
+            } )
     }
 
     private handleError(error: any): Promise<any> {

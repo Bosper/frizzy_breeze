@@ -28,7 +28,7 @@ export class RootComponent implements OnInit {
     }
 
     ngOnInit() {
-        this.getNavigation();
+        //this.getNavigation();
     }
 
 

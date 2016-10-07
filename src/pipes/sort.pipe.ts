@@ -7,7 +7,6 @@ import { Album } from '../app/album.class';
 export class OrderByPipe implements PipeTransform {
 
     transform( array: Array<Album> ) {
-        debugger;
         array.sort((a: any, b: any) => {
             if (a.order < b.order) {
                 return -1;

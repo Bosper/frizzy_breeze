@@ -31,7 +31,7 @@ const appRoutes: Routes = [
         component: CategoryComponent
     },
     {
-        path: 'dashboard',
+        path: 'authentication',
         component: DashboardComponent
     }
 ]

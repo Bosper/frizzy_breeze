@@ -8,7 +8,7 @@ export class Album {
   category: number;
   desc: string;
   order: number;
-  // active: boolean;
+  active: boolean;
   // cover: number;
 
 

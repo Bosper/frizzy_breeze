@@ -12,7 +12,8 @@ import { Photo } from './photo.class';
 
 export class DetailComponent implements OnInit {
 
-    constructor( private route: ActivatedRoute, private appService: AppService ) {}
+    constructor( private route: ActivatedRoute, private appService: AppService) {
+    }
 
     sub: any;
     navigated: boolean = false;
