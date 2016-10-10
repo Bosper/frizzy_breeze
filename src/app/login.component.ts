@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
 import { AppService } from './app.service';
+import { User } from './login.class';
 
 @Component({
     selector: 'login',
@@ -8,6 +9,10 @@ import { AppService } from './app.service';
 })
 export class LoginComponent implements OnInit {
     passport: FormGroup;
+    users: User[];
+
+    user: User[];
+    result: any;
 
     constructor(private formBuilder: FormBuilder, private appService: AppService) {
         this.passport = new FormGroup({
@@ -16,15 +21,29 @@ export class LoginComponent implements OnInit {
         })
     }
 
-    onSubmit(form:FormGroup):void {
-        if (form.valid) {
-            console.log(form.controls, form.value, form.value.username, form.value.password);
-            this.appService.signIn(form.value.username, form.value.password)
+    // onSubmit(form:FormGroup):void {
+    //     if (form.valid) {
+    //         console.log(form.controls, form.value, form.value.username, form.value.password);
+    //         this.appService.getUser()
+    //             .then( result => {this.users = result; console.log(this.users)})
             
 
-        } else {
-            console.log("Form is not VALID!");
+    //     } else {
+    //         console.log("Form is not VALID!");
             
+    //     }
+    // }
+
+    onSubmit(form:FormGroup) {
+        let userform: FormGroup = form.value;
+        console.log("userform: ", userform);
+        
+        if (form.valid) {
+            console.log(form.value);
+            this.appService.signIn(userform)  
+                .subscribe(form => console.log('subscribe: ', form))
+        } else {
+            console.log("Form is not VALID!"); 
         }
     }
 

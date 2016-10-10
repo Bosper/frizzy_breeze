@@ -6,6 +6,7 @@ import { Observable } from 'rxjs';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 import { Navigation } from './navigation.class';
+import { User } from './login.class';
 
 import 'rxjs/add/operator/map';
 
@@ -19,7 +20,7 @@ export class AppService {
     private photoUrl = "app/photos";
     private navUrl = "app/navigation";
 
-    private newPhotoUrl = "http://127.0.0.1:3000/test";
+    private newPhotoUrl = "http://127.0.0.1:3005/test";
     private signInUrl = "http://127.0.0.1:3005/login";
 
     access: boolean = false;
@@ -95,13 +96,57 @@ export class AppService {
             })
     }
 
-    signIn(username: string, password: string) {
-        console.log("service: ", username, password);
-        return this.http
-            .post( this.signInUrl, JSON.stringify({ username: username, password: password }) )
-            .subscribe( (res:Response) => {console.log(res);
-            } )
+    getUser(): Promise<User[]> {
+        return this.http.get( this.signInUrl )
+            .toPromise()
+            .then((result: Response) => result.json().data as User[])
+            .catch(this.handleError);
     }
+
+    signIn(dataUser: Object): Observable<User> {
+       dataUser = JSON.stringify(dataUser);
+       debugger;
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+        });
+        let options = new RequestOptions({ headers: headers });
+
+        console.log("data: ", dataUser, "\nHeaders: ", headers);
+    
+        return this.http
+            .post( this.signInUrl, dataUser, options)
+            .map( (res:Response) => res.json().data || {  } as User )
+            .catch(this.handleError);
+
+    }
+
+    // signIn(data:Object): Promise<User> {
+    //     let body = JSON.stringify({data});
+    //     let headers = new Headers({
+    //         'Content-type': 'application/json',
+    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005',
+    //         'Accept': 'q=0.8;application/json;q=0.9'
+    //     });
+    //     let options = new RequestOptions({
+    //         headers: headers
+    //     });
+    //     console.log(this.signInUrl);
+        
+    //     return this.http.post( this.signInUrl, body, options)
+    //         .toPromise()
+    //         .then(this.extractData)
+    //         .catch(this.handleError);
+
+    // }
+
+    // private extractData(res: Response) {
+    //     let body = res.json();
+    //     debugger;
+    //     console.log('service: ', body.data);
+    //     return body.data || { };
+    // }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);
