@@ -25,7 +25,7 @@ export class CategoryComponent implements OnInit {
             params => {
                 if (params[ 'id' ] != undefined) {
                     let id = +params[ 'id' ]
-                    console.log(id);
+                    console.log('ID: ' + id);
                     
                     this.appService.getCategoryAlbums(id)
                         .then( categoryAlbums => {this.categoryAlbums = categoryAlbums; console.log(this.categoryAlbums);
