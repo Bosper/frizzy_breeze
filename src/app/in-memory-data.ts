@@ -25,9 +25,6 @@ export class InMemoryData implements InMemoryDbService {
             { id: 4, order: 4, active: true, url: "Numer cztery" },
             { id: 5, order: 5, active: true, url: "Numer pięć" },
             { id: 6, order: 6, active: true, url: "Numer sześć" },
-            { id: 7, order: 7, active: true, url: "Numer siedem" },
-            { id: 8, order: 8, active: true, url: "Numer osiem" },
-            { id: 9, order: 8, active: true, url: "Numer dziewięć" }
         ];
 
         let navigation: Navigation[] = [
