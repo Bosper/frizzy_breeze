@@ -12,7 +12,7 @@ export class LoginComponent implements OnInit {
     users: User[];
 
     user: User[];
-    result: any;
+    logged: Boolean = false;
 
     constructor(private formBuilder: FormBuilder, private appService: AppService) {
         this.passport = new FormGroup({
@@ -39,14 +39,20 @@ export class LoginComponent implements OnInit {
         console.log("userform: ", userform);
         
         if (form.valid) {
-            console.log(form.value);
+            //console.log(form.value);
             this.appService.signIn(userform)  
-                .subscribe(form => console.log('subscribe: ', form))
+                //.subscribe(form => console.log('subscribe: ', form))
+                .subscribe(result => this.logged = result)
+                //.then(result => result)
         } else {
             console.log("Form is not VALID!"); 
         }
     }
 
+    testLogin() {
+        this.appService.testLogin()
+            .subscribe()
+    }
 
 
     ngOnInit() { }
