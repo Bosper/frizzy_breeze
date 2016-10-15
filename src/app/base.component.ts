@@ -31,12 +31,6 @@ export class BaseComponent implements OnInit {
       .catch(error => this.error = error)
   }
 
-  // logBaaS() {
-  //   return this.appService.getTest()
-  //     .subscribe( result => {this.test = result; console.log(result, this.test);
-  //     } )
-  // }
-
   getAlbums() {
     return this.appService.getAlbums()
       .then(result => this.albums = result)

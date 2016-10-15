@@ -20,6 +20,7 @@ export class RootComponent implements OnInit {
     title: string = 'Root Component';
     navigation: Navigation[];
     error: any;
+    logged: boolean = true;
 
     getNavigation() {
         this.appService.getNavigation()

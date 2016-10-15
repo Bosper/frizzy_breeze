@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 import { Navigation } from './navigation.class';
-import { User } from './login.class';
+import { User } from './login.model';
+import { Token } from './token.model';
 
 import 'rxjs/add/operator/map';
 
@@ -20,8 +21,8 @@ export class AppService {
     private photoUrl = "app/photos";
     private navUrl = "app/navigation";
 
-    private newPhotoUrl = "http://127.0.0.1:3000/test";
-    private signInUrl = "http://127.0.0.1:3000/login";
+    private newPhotoUrl = "http://127.0.0.1:3005/test";
+    private API_END_POINT = "http://127.0.0.1:3005/api";
 
     access: boolean = false;
 
@@ -96,17 +97,23 @@ export class AppService {
             })
     }
 
-    getUser(): Promise<User[]> {
-        return this.http.get( this.signInUrl )
-            .toPromise()
-            .then((result: Response) => result.json().data as User[])
+    verifyToken(token: Token): Observable<Token> {
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+        });
+        let body = JSON.stringify(token);
+        console.log("SERVICE BODY: ", body);
+        return this.http
+            .post(this.API_END_POINT + "/tokenCheck", body, { headers: headers })
+            .map((res:Response) => res.json())
             .catch(this.handleError);
     }
 
-    signIn(dataUser: Object): Observable<any> {
+    signIn(dataUser: Object): Observable<Token> {
         let headers = new Headers({
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:3000'
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
         });
         let options = new RequestOptions({ headers: headers });
 
@@ -114,15 +121,10 @@ export class AppService {
         console.log("data: ", dataUser, "\nHeaders: ", headers);
     
         return this.http
-            .post( this.signInUrl, dataUser, {headers: headers})
-            .map( (res:Response) => res.json().data || {  } as User )
+            .post( this.API_END_POINT + "/authenticate", dataUser, {headers: headers})
+            .map( (res:Response) => res.json() as Token )
             .catch(this.handleError);
 
-    }
-
-    testLogin() {
-        return this.http.get( 'http://127.0.0.1:3000/connect' )
-            .map( result => result.json() );
     }
 
     private handleError(error: any): Promise<any> {
