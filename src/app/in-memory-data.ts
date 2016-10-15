@@ -25,10 +25,6 @@ export class InMemoryData implements InMemoryDbService {
             { id: 4, order: 4, active: true, url: "Numer cztery" },
             { id: 5, order: 5, active: true, url: "Numer pięć" },
             { id: 6, order: 6, active: true, url: "Numer sześć" },
-<<<<<<< Updated upstream
-=======
-            { id: 7, order: 7, active: true, url: "Numer siedem" }
->>>>>>> Stashed changes
         ];
 
         let navigation: Navigation[] = [
