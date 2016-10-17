@@ -42,8 +42,9 @@ export class LoginComponent implements OnInit {
                     if(result.success) {
                         this.token = result
                         this.logged = true;
-                        this.localSession.store('token', this.token.token);
-                        this.updateLogin.emit(this.logged)
+                        this.localSession.store("token", this.token.token)
+                        this.updateLogin.emit([this.logged, this.token]);
+                        this.verifyToken(this.token);
                     } else {
                         console.log("FAILED LOGIN!")
                     }
@@ -53,26 +54,6 @@ export class LoginComponent implements OnInit {
             console.log("Form is not VALID!"); 
         }
     }
-
-    // verifyToken(token: Token) {
-    //     if(this.token) {
-    //         this.appService.verifyToken(token)
-    //         .subscribe(result => {
-    //             console.log("RESULT: ", result);
-    //             console.log("TOKEN SUCCESS: ", this.token);
-    //             if(result.success) {
-    //                 this.logged = true;
-    //                 console.log("IF TRUE: ", this.logged);
-    //                 this.updateLogin.emit(this.logged);
-    //             } else {
-    //                 this.logged = false;
-    //                 console.log("IF FASLE: ", this.logged);
-    //             }
-    //         });
-    //     } else {
-    //         console.log("NO TOKEN PROVIDED");
-    //     }
-    // }
 
         verifyToken(token: any) {
             let key:string = this.localSession.retrieve('token');
@@ -89,10 +70,11 @@ export class LoginComponent implements OnInit {
                     console.log("TOKEN SUCCESS: ", this.token);
                     if(result.success) {
                         this.logged = true;
-                        console.log("IF TRUE: ", this.logged);
                         this.updateLogin.emit(this.logged);
+                        console.log("IF TRUE: ", this.logged);
                     } else {
                         this.logged = false;
+                        this.updateLogin.emit(this.logged);
                         console.log("IF FASLE: ", this.logged);
                     }
                 });
@@ -105,15 +87,8 @@ export class LoginComponent implements OnInit {
         console.log(this.token, "LOGGED: ", this.logged, this.verifyToken(this.token));
     }
 
-
    ngOnInit() {
-        //console.log("ONINIT: ", this.token);
-        this.verifyToken(this.token);
-        // localStorage.setItem('Token', JSON.stringify({ success: false, message: "Not authenticated", token: "empty" }));
-
-        // var currentUser = JSON.parse(localStorage.getItem('currentUser'));
-        // var token = currentUser.token; // your token
-        // console.log(token);
+        //this.verifyToken(this.token);
     }
 
 }
