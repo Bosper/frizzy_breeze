@@ -1,5 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
+import {LocalStorageService, SessionStorageService} from 'ng2-webstorage';
+
 import { AppService } from './app.service';
 import { User } from './login.model';
 import { Token } from './token.model';
@@ -18,14 +20,14 @@ export class LoginComponent implements OnInit {
 
     @Output() updateLogin: EventEmitter<any>;
 
-    constructor(private formBuilder: FormBuilder, private appService: AppService) {
+    constructor(private formBuilder: FormBuilder, private appService: AppService, private localStorage:LocalStorageService, private localSession: SessionStorageService) {
         this.passport = new FormGroup({
             username: new FormControl("", Validators.required),
             password: new FormControl("", Validators.required),
         });
 
-        //this.token = new Token();
-        //this.token = {success: false, message: "Not authenticated", token: "empty"};
+        this.token = new Token();
+        this.token = {success: false, message: "Not authenticated", token: "empty"};
 
         this.updateLogin = new EventEmitter();
     }
@@ -40,6 +42,7 @@ export class LoginComponent implements OnInit {
                     if(result.success) {
                         this.token = result
                         this.logged = true;
+                        this.localSession.store('token', this.token.token);
                         this.updateLogin.emit(this.logged)
                     } else {
                         console.log("FAILED LOGIN!")
@@ -51,32 +54,59 @@ export class LoginComponent implements OnInit {
         }
     }
 
-    verifyToken(token: Token) {
-        if(this.token) {
-            this.appService.verifyToken(token)
-            .subscribe(result => {
-                console.log("RESULT: ", result);
-                console.log("TOKEN SUCCESS: ", this.token);
-                if(result.success) {
-                    this.logged = true;
-                    console.log("IF TRUE: ", this.logged);
-                    this.updateLogin.emit(this.logged);
-                } else {
-                    this.logged = false;
-                    console.log("IF FASLE: ", this.logged);
-                }
-            });
-        } else {
-            console.log("NO TOKEN PROVIDED");
+    // verifyToken(token: Token) {
+    //     if(this.token) {
+    //         this.appService.verifyToken(token)
+    //         .subscribe(result => {
+    //             console.log("RESULT: ", result);
+    //             console.log("TOKEN SUCCESS: ", this.token);
+    //             if(result.success) {
+    //                 this.logged = true;
+    //                 console.log("IF TRUE: ", this.logged);
+    //                 this.updateLogin.emit(this.logged);
+    //             } else {
+    //                 this.logged = false;
+    //                 console.log("IF FASLE: ", this.logged);
+    //             }
+    //         });
+    //     } else {
+    //         console.log("NO TOKEN PROVIDED");
+    //     }
+    // }
+
+        verifyToken(token: any) {
+            let key:string = this.localSession.retrieve('token');
+            let tokenObj: Token = this.token;
+            if(key) tokenObj.token = key;
+            else console.log("NO TOKEN KEY IN SESSION!");
+            
+
+            console.log("KEY: ", key);
+            if(this.token) {
+                this.appService.verifyToken(token)
+                .subscribe(result => {
+                    console.log("RESULT: ", result);
+                    console.log("TOKEN SUCCESS: ", this.token);
+                    if(result.success) {
+                        this.logged = true;
+                        console.log("IF TRUE: ", this.logged);
+                        this.updateLogin.emit(this.logged);
+                    } else {
+                        this.logged = false;
+                        console.log("IF FASLE: ", this.logged);
+                    }
+                });
+            } else {
+                console.log("NO TOKEN PROVIDED");
+            }
         }
-    }
 
     checkToken() {
         console.log(this.token, "LOGGED: ", this.logged, this.verifyToken(this.token));
     }
 
 
-    ngOnInit() {
+   ngOnInit() {
         //console.log("ONINIT: ", this.token);
         this.verifyToken(this.token);
         // localStorage.setItem('Token', JSON.stringify({ success: false, message: "Not authenticated", token: "empty" }));
