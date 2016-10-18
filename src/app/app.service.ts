@@ -97,35 +97,79 @@ export class AppService {
             })
     }
 
-    verifyToken(token: Token): Observable<Token> {
+    signIn(userData: Object): Observable<any> {
+        let body = JSON.stringify(userData);
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
         });
-        let body = JSON.stringify(token);
-        console.log("SERVICE BODY: ", body);
+
         return this.http
-            .post(this.API_END_POINT + "/tokenCheck", body, { headers: headers })
+            .post( this.API_END_POINT + "/authenticate", body, { headers: headers } )
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
+    
+    verifyToken(token:string): Observable<Object> {
+        let body = JSON.stringify(token);
+
+        let headers = new Headers({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+        });
+
+        return this.http
+            .post(this.API_END_POINT + "/tokenCheck", body, {headers: headers})
             .map((res:Response) => res.json())
             .catch(this.handleError);
+
     }
 
-    signIn(dataUser: Object): Observable<Token> {
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-        });
-        let options = new RequestOptions({ headers: headers });
+    // getToken(token: string): Promise<String>  {
 
-        dataUser = JSON.stringify(dataUser);
-        console.log("data: ", dataUser, "\nHeaders: ", headers);
+    //     let body = JSON.stringify(token);
+
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+    //     });
+
+    //     return this.http
+    //         .post( this.API_END_POINT + '/token', body, {headers: headers} )
+    //         .toPromise()
+    //         .then( (res: Response) => res.json() )
+    //         .catch(this.handleError);
+    // }
+
+    // verifyToken(token: string): Observable<Object> {
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+    //     });
+    //     let body = JSON.stringify(token);
+    //     console.log("SERVICE BODY: ", body);
+    //     return this.http
+    //         .post(this.API_END_POINT + "/tokenCheck", body, { headers: headers })
+    //         .map((res:Response) => res.json())
+    //         .catch(this.handleError);
+    // }
+
+    // signIn(dataUser: Object): Observable<Token> {
+    //     let headers = new Headers({
+    //         'Content-Type': 'application/json',
+    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+    //     });
+    //     let options = new RequestOptions({ headers: headers });
+
+    //     dataUser = JSON.stringify(dataUser);
+    //     console.log("data: ", dataUser, "\nHeaders: ", headers);
     
-        return this.http
-            .post( this.API_END_POINT + "/authenticate", dataUser, {headers: headers})
-            .map( (res:Response) => res.json() as Token )
-            .catch(this.handleError);
+    //     return this.http
+    //         .post( this.API_END_POINT + "/authenticate", dataUser, {headers: headers})
+    //         .map( (res:Response) => res.json() as Token )
+    //         .catch(this.handleError);
 
-    }
+    // }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);

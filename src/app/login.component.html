@@ -1,6 +1,6 @@
 <div class="row">
     <div name="login-box" class="col-sm-4 col-sm-offset-4">
-        <form [formGroup]="passport" (submit)="onSubmit(passport)">
+        <form [formGroup]="passport" (submit)="signIn(passport)">
             <fieldset class="form-group">
                 <label for="login">Username: </label>
                 <input class="form-control" formControlName="username" type="text" name="login" placeholder="Username">
