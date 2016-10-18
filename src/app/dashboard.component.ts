@@ -11,7 +11,7 @@ import { AppService } from './app.service';
 })
 export class DashboardComponent implements OnInit {
     date: Date;
-    isLogged: boolean;
+    isLogged: boolean = true;
     token: string;
 
     constructor(private localSession: SessionStorageService, private appService: AppService) {
@@ -27,9 +27,20 @@ export class DashboardComponent implements OnInit {
     changeView() {
         let token = this.localSession.retrieve('token');
         if (token) {
-            this.isLogged = true;
-            console.log("DASHBOARD LOG TRUE", this.isLogged);
+            this.appService.verifyToken(token)
+                .subscribe(result => {
+                    console.log(result);
+                    if (result.success) {
+                        this.isLogged = true;
+                        console.log("DASHBOARD LOG TRUE", this.isLogged);
+                    } else {
+                        this.isLogged = false;
+                        console.log("DASHBOARD LOG FALSE", this.isLogged);
+                    }
+                })
             
+        } else {
+            this.isLogged = false;
         }
     }
 

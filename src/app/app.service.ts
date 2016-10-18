@@ -110,9 +110,8 @@ export class AppService {
             .catch(this.handleError);
     }
     
-    verifyToken(token:string): Observable<Object> {
-        let body = JSON.stringify(token);
-
+    verifyToken(token:string): Observable<any> {
+        let body = JSON.stringify({token: token});
         let headers = new Headers({
             'Content-Type': 'application/json',
             'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
