@@ -24,8 +24,6 @@ export class AppService {
     private newPhotoUrl = "http://127.0.0.1:3005/test";
     private API_END_POINT = "http://127.0.0.1:3005/api";
 
-    access: boolean = false;
-
     getTest(): Promise<Test[]> {
         return this.http
             .get( this.newPhotoUrl )
@@ -43,15 +41,17 @@ export class AppService {
 
     getNavigation(): Promise<Navigation[]>  {
         return this.http
-            .get( this.navUrl )
+            // .get( this.navUrl )
+            .get(this.API_END_POINT + "/navigation")
             .toPromise()
-            .then( (res: Response) => res.json().data )
+            .then((res: Response) => res.json())
             .catch(this.handleError);
     }
 
     getAlbums(): Promise<Album[]> {
         return this.http
-            .get(this.albumUrl)
+            //.get(this.albumUrl)
+            .get(this.API_END_POINT + "/albums")
             .toPromise()
             .then((res: Response) => res.json().data as Album[])
             .catch(this.handleError);
@@ -59,7 +59,8 @@ export class AppService {
 
     getPhotos(): Promise<Photo[]> {
         return this.http
-            .get(this.photoUrl)
+            //.get(this.photoUrl)
+            .get(this.API_END_POINT + "/photos")
             .toPromise()
             .then((res: Response) => res.json().data as Photo[])
             .catch(this.handleError);

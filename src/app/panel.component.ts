@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import './panel.component.scss';
 
 @Component({
     selector: 'panel',
