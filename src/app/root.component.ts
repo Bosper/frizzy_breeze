@@ -8,9 +8,11 @@ import { Navigation } from './navigation.class';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 
+import './root.component.scss';
+
 @Component({
     selector: 'app',
-    template : require('./root.component.html'),
+    template : require('./root.component.html')
 })
 
 export class RootComponent implements OnInit {

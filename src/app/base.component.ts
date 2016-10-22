@@ -62,8 +62,8 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    //this.getAlbums();
-    //this.getPhotos();
-    //this.getStartAlbums();
+    this.getAlbums();
+    this.getPhotos();
+    this.getStartAlbums();
   }
 }

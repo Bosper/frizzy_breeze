@@ -3,5 +3,6 @@
     <span>{{ album.title }}</span>
     <div *ngFor="let photo of activePhotos">
         <span>{{ photo.url }}</span>
+        <img src="{{ photo.url }}" alt="" />
     </div>
 </div>

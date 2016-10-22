@@ -56,6 +56,8 @@ export class DashboardComponent implements OnInit {
 
 
 
+
+
     // checkToken() {
     //     this.appService.getToken(this.token)
     //         .then( result => {

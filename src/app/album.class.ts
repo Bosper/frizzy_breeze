@@ -9,7 +9,5 @@ export class Album {
   desc: string;
   order: number;
   active: boolean;
-  // cover: number;
-
-
+  cover: number;
 }

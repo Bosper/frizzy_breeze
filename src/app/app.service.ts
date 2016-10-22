@@ -10,6 +10,7 @@ import { User } from './login.model';
 import { Token } from './token.model';
 
 import 'rxjs/add/operator/map';
+import { Subject }    from 'rxjs/Subject';
 
 import { Test } from './test.class';
 
@@ -53,7 +54,7 @@ export class AppService {
             //.get(this.albumUrl)
             .get(this.API_END_POINT + "/albums")
             .toPromise()
-            .then((res: Response) => res.json().data as Album[])
+            .then((res: Response) => res.json() as Album[])
             .catch(this.handleError);
     }
 
@@ -62,7 +63,7 @@ export class AppService {
             //.get(this.photoUrl)
             .get(this.API_END_POINT + "/photos")
             .toPromise()
-            .then((res: Response) => res.json().data as Photo[])
+            .then((res: Response) => res.json() as Photo[])
             .catch(this.handleError);
     }
 

@@ -1,0 +1,15 @@
+.container-fluid {
+    text-align: center;
+}
+nav a {
+    color: #000;
+    &:hover {
+        color: red;
+    }
+}
+
+.logo {
+    &--text {
+        color: #000;
+    }
+} 

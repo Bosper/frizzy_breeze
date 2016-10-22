@@ -1,11 +1,29 @@
-<h1>Base Component</h1>
 <div *ngIf="activeAlbums != null">
-<ul>
+    <div class="album-container">
+        <div *ngFor="let album of activeAlbums | orderBy: ['activeAlbums']" (click)="goDetail(album)" class="album__item">
+            <div class="album__item--cover">
+                <span>{{ album.cover }}</span>
+            </div>
+            <div class="album__item--story">
+                <div class="album__item--title">
+                    {{ album.title | uppercase }}
+                </div>
+                <div class="album__item--desc">
+                    {{ album.desc }}
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+<!--<ul>
     <li *ngFor="let album of activeAlbums | orderBy: ['activeAlbums']" (click)="goDetail(album)">
         <span>{{ album.title | uppercase}}</span>
         <span>{{ album.desc }}</span>
     </li>
-</ul>
+</ul>-->
+
+
 </div>
 
 <button type="text" (click)="logAlbums()">GET Albums</button>
