@@ -1,7 +1,7 @@
 <div class="container-fluid">
-    <header *ngIf="x">
-        <div class="logo">
-            <a routerLink="/"><h1 class="logo--text">{{title | uppercase}}</h1></a>
+    <header *ngIf="x" class="head">
+        <div class="head__logo">
+            <a routerLink="/"><h1 class="head__logo--text">{{title | uppercase}}</h1></a>
         </div>
         
         <nav>
@@ -10,6 +10,6 @@
         </nav>
     </header>
     <router-outlet></router-outlet>
+    <social *ngIf="x"></social>
 </div>
 
-<social *ngIf="x"></social>

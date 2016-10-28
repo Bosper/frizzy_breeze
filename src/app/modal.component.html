@@ -1,0 +1,95 @@
+<!-- Large modal -->
+<div class="album album__add">
+    <button class="glyphicon glyphicon-plus" (click)="createAlbum()"></button>
+</div>
+
+<div bsModal #lgModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myLargeModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-lg" *ngIf="album">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" (click)="lgModal.hide()" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Add a new album</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="albumForm">
+            <fieldset class="form-group">
+                <label for="id">ID: </label>
+                <input type="text" class="form-control" name="id" formControlName="id" [(ngModel)]="album.id" disabled>
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="title">Title: </label>
+                <input type="text" class="form-control" name="title" formControlName="title" [(ngModel)]="album.title" placeholder="Write some title..">
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="description">Description: </label>
+                <input type="text" class="form-control" name="description" formControlName="desc" [(ngModel)]="album.desc" placeholder="...and some description">
+            </fieldset>
+            <fieldset class="form-group" *ngIf="editAlbum">
+                <label for="images">Album images: </label>
+                <div class="ds-photo">
+                    <div class="ds-photo__container col-sm-5">
+                        <div class="ds-photo__item" *ngFor="let photo of albumNotPhotos" (click)="checkPhoto(photo, albumNotPhotos)">
+                            <div class="ds-photo__item--cover">
+                                <img class="ds-photo__item--picture-photo" height="100" [src]="photo.url" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <!--<div class="ds-photo__container col-sm-2">
+                        <button [type]="text" (click)="pushPhotos()" style="height: 50px;">Push It!</button>
+                        <button [type]="text" (click)="checkAlbum()" style="height: 50px;">Check</button>
+                        <button type="text" (click)="difference(albumNotPhotos)">Difference!</button>
+                    </div>-->
+                    <div class="ds-photo__container col-sm-5">
+                        <div class="ds-photo__item" *ngFor="let albumPhoto of albumPhotos" (click)="checkPhoto(albumPhoto)">
+                            <div class="ds-photo__item--cover">
+                                <img class="ds-photo__item--picture-photo" [src]="albumPhoto.url" alt="">
+                            </div>
+
+                        </div>
+                    </div>
+                    
+                </div>
+                <input type="hidden" class="form-control" name="images" formControlName="photoId" [(ngModel)]="album.photoId">
+            </fieldset>
+            <fieldset class="form-group" styles="display: flex; justify-content: space-between;">
+                <label for="start">Main Wall: </label>
+                <input type="radio" name="start" [value]="true" formControlName="start" [(ngModel)]="album.start"><span> Yes</span>&nbsp;
+                <input type="radio" name="start" [value]="false" formControlName="start" [(ngModel)]="album.start"><span> No</span>
+
+                <label for="category">Category: </label>
+                <select formControlName="category" [(ngModel)]="album.category">
+                    <option value="1">Portrait</option>
+                    <option value="2">Editorial</option>
+                    <option value="3">Vision</option>
+                </select>
+
+                <label for="Order">Order: </label>
+                <input type="text" name="order" formControlName="order" [(ngModel)]="album.order">
+
+                <label for="active">Display: </label>
+                <input type="radio" name="active" [value]="true" formControlName="active" [(ngModel)]="album.active"><span> Yes</span>&nbsp;
+                <input type="radio" name="active" [value]="false" formControlName="active" [(ngModel)]="album.active"><span> No</span>  
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="active">Cover: </label>
+                <div class="ds-photo__container col-sm-12">
+                    <div class="ds-photo__item" *ngFor="let albumPhoto2 of albumPhotos">
+                        <div class="ds-photo__item--cover">
+                            <img class="ds-photo__item--cover-photo" [src]="albumPhoto2.url" alt="" (click)="choseCover(albumPhoto2)" [class.selected]="album.cover === albumPhoto2.id">
+                        </div>
+                    </div>
+                    
+                </div>
+                <input type="text" name="cover" formControlName="cover" [(ngModel)]="album.cover">
+            </fieldset>
+            <fieldset class="form-group">
+	            <button type="submit" class="btn btn-success" (click)="passAlbum(albumForm)">Save</button>
+                <button type="text" class="btn btn-default" (click)="closeModal()">Discard</button>
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

@@ -12,4 +12,6 @@ import 'rxjs';
 
 //Other vendors
 import 'bootstrap-css-only';
-//import 'ng2-bootstrap';
+import 'ng2-bootstrap';
+import 'lodash';
+import 'masonry-layout';

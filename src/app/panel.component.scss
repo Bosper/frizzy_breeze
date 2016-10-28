@@ -90,3 +90,41 @@ flex-direction: row;
 
     }
 }
+
+.panel-body {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.album {
+    padding: 5px;
+    margin: 5px;
+
+
+    &__cover {
+        //border: 1px solid red;
+        min-width: 200px;
+        max-width: 200px;
+        max-height: 100px;
+        overflow: hidden;
+    }
+
+    &__picture {
+        width: 100%;
+        height: auto;
+    }
+
+    &__desc {
+        padding: 10px;
+    }
+
+    &__add {
+        display: flex;
+        min-width: 200px;
+        max-width: 200px;
+        max-height: 100px;
+        height: 100px;
+    }
+}

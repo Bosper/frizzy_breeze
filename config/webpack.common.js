@@ -39,10 +39,15 @@ module.exports = {
                 include: helpers.root('src', 'app'),
                 loader: 'raw!css'
             },
+            // {
+            //     test: /\.scss$/,
+            //     loader: 'style-loader!css-loader!sass-loader?sourceMap',
+            //     exclude: helpers.root('node_modules')
+            // },
             {
                 test: /\.scss$/,
-                loader: 'style-loader!css-loader!sass-loader?sourceMap',
-                exclude: helpers.root('node_modules')
+                exclude: /node_modules/,
+                loaders: ['raw-loader', 'sass-loader'] // sass-loader not scss-loader
             }
         ]
     },

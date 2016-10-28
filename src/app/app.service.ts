@@ -8,11 +8,14 @@ import { Photo } from './photo.class';
 import { Navigation } from './navigation.class';
 import { User } from './login.model';
 import { Token } from './token.model';
+import { Status } from './status.model';
 
 import 'rxjs/add/operator/map';
 import { Subject }    from 'rxjs/Subject';
 
 import { Test } from './test.class';
+
+import * as _ from 'lodash';
 
 @Injectable()
 export class AppService {
@@ -24,6 +27,11 @@ export class AppService {
 
     private newPhotoUrl = "http://127.0.0.1:3005/test";
     private API_END_POINT = "http://127.0.0.1:3005/api";
+
+    private headers = new Headers({
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+        });
 
     getTest(): Promise<Test[]> {
         return this.http
@@ -90,7 +98,6 @@ export class AppService {
         return this.getPhotos()
             .then((photos) => {
                 for (let i = 0; i < albumPhotosId.length; i++) {
-                    console.log(albumPhotosId[i]);
                     let element = photos.find(photos => photos.id === albumPhotosId[i])
                     activePhotos.push(element);
                 }
@@ -99,78 +106,45 @@ export class AppService {
             })
     }
 
+    //AUTHORISATION
     signIn(userData: Object): Observable<any> {
         let body = JSON.stringify(userData);
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-        });
 
         return this.http
-            .post( this.API_END_POINT + "/authenticate", body, { headers: headers } )
+            .post( this.API_END_POINT + "/authenticate", body, { headers: this.headers } )
             .map((res: Response) => res.json())
             .catch(this.handleError);
     }
     
     verifyToken(token:string): Observable<any> {
         let body = JSON.stringify({token: token});
-        let headers = new Headers({
-            'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-        });
 
         return this.http
-            .post(this.API_END_POINT + "/tokenCheck", body, {headers: headers})
+            .post(this.API_END_POINT + "/tokenCheck", body, { headers: this.headers })
             .map((res:Response) => res.json())
             .catch(this.handleError);
 
     }
 
-    // getToken(token: string): Promise<String>  {
+    //DASHBOARD
 
-    //     let body = JSON.stringify(token);
+    createAlbum(album: Album): Observable<Status> {
+        let body = JSON.stringify(album);
 
-    //     let headers = new Headers({
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-    //     });
+        return this.http
+            .post(this.API_END_POINT + '/createAlbum', body, { headers: this.headers })
+            .map((res: Response) => res.json())
+            .catch(this.handleError);
+    }
 
-    //     return this.http
-    //         .post( this.API_END_POINT + '/token', body, {headers: headers} )
-    //         .toPromise()
-    //         .then( (res: Response) => res.json() )
-    //         .catch(this.handleError);
-    // }
+    updateAlbum(album: Album): Observable<Status> {
+        let body = JSON.stringify(album);
 
-    // verifyToken(token: string): Observable<Object> {
-    //     let headers = new Headers({
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-    //     });
-    //     let body = JSON.stringify(token);
-    //     console.log("SERVICE BODY: ", body);
-    //     return this.http
-    //         .post(this.API_END_POINT + "/tokenCheck", body, { headers: headers })
-    //         .map((res:Response) => res.json())
-    //         .catch(this.handleError);
-    // }
-
-    // signIn(dataUser: Object): Observable<Token> {
-    //     let headers = new Headers({
-    //         'Content-Type': 'application/json',
-    //         'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
-    //     });
-    //     let options = new RequestOptions({ headers: headers });
-
-    //     dataUser = JSON.stringify(dataUser);
-    //     console.log("data: ", dataUser, "\nHeaders: ", headers);
-    
-    //     return this.http
-    //         .post( this.API_END_POINT + "/authenticate", dataUser, {headers: headers})
-    //         .map( (res:Response) => res.json() as Token )
-    //         .catch(this.handleError);
-
-    // }
+        return this.http
+            .post(this.API_END_POINT + '/updateAlbum', body, { headers: this.headers })
+            .map((res: Response) => res.json() as Status)
+            .catch(this.handleError);
+    }
 
     private handleError(error: any): Promise<any> {
         console.error('An error occurred', error);

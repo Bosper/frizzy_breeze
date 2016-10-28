@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormControl } from '@angular/forms';
-import {LocalStorageService, SessionStorageService} from 'ng2-webstorage';
+import { LocalStorageService, SessionStorageService } from 'ng2-webstorage';
 
 import { AppService } from './app.service';
 import { User } from './login.model';
@@ -20,7 +20,12 @@ export class LoginComponent implements OnInit {
 
     @Output() updateLogin: EventEmitter<any>;
 
-    constructor(private formBuilder: FormBuilder, private appService: AppService, private localStorage:LocalStorageService, private localSession: SessionStorageService) {
+    constructor(
+        private formBuilder: FormBuilder, 
+        private appService: AppService, 
+        private localStorage:LocalStorageService, 
+        private localSession: SessionStorageService) {
+            
         this.passport = new FormGroup({
             username: new FormControl("", Validators.required),
             password: new FormControl("", Validators.required),

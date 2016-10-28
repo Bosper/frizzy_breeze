@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit, ViewChild } from '@angular/core';
+import { Component, ViewContainerRef, OnInit, AfterViewInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
 import { AppService } from './app.service'
@@ -8,23 +8,29 @@ import { Navigation } from './navigation.class';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 
-import './root.component.scss';
+//import './root.component.scss';
+import * as _ from 'lodash';
+
+    
 
 @Component({
     selector: 'app',
-    template : require('./root.component.html')
+    template : require('./root.component.html'),
+    styleUrls: ["./root.component.scss"],
+    encapsulation: ViewEncapsulation.None
 })
 
 export class RootComponent implements OnInit {
-    constructor( private appService: AppService, private route: ActivatedRoute, private router: Router ) {
 
-    }
-
-    title: string = 'Root Component';
+    title: string = 'Lounge Exposure';
     navigation: Navigation[];
     error: any;
     logged: boolean = true;
     x:boolean;
+
+    constructor( private appService: AppService, private route: ActivatedRoute, private router: Router, private viewContainerRef:ViewContainerRef ) {
+
+    }
 
     getNavigation() {
         this.appService.getNavigation()
@@ -46,6 +52,7 @@ export class RootComponent implements OnInit {
     ngOnInit() {
         this.getNavigation();
         this.hideHeader();
+        console.log("Lodash Version: ", _.VERSION);
 
         
             

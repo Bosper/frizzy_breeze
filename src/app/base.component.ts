@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from './app.service';
@@ -8,10 +8,14 @@ import { Photo } from './photo.class';
 import { Vocabulary } from './app.vocabulary';
 import { Test } from './test.class';
 
+let styles = require('./base.component.scss');
+
 @Component({
   selector: 'main',
   providers: [ Vocabulary ], 
-  template : require('./base.component.html') 
+  template : require('./base.component.html') ,
+  styleUrls: ['./base.component.scss'],
+  encapsulation: ViewEncapsulation.None
 })
 
 export class BaseComponent implements OnInit {
@@ -35,6 +39,15 @@ export class BaseComponent implements OnInit {
     return this.appService.getAlbums()
       .then(result => this.albums = result)
       .catch(error => this.error = error)
+  }
+  
+  getCoverPhoto(cover: number) {
+    //console.log("COVER: ", this.photos.filter( photo => photo.id === cover ));
+    let photos:Photo[] = this.photos.filter( photo => photo.id === cover );
+    let photo = JSON.stringify(photos[0].url);
+    console.log("COVER: ", photo);
+    
+    return photos[0].url;
   }
 
   getStartAlbums() {

@@ -6,7 +6,8 @@ import { HttpModule } from '@angular/http';
 
 //THIRD PARTY MODULES
 //import { CoolStorageModule } from 'angular2-cool-storage';
-import {Ng2Webstorage} from 'ng2-webstorage';
+import { Ng2Webstorage } from 'ng2-webstorage';
+import { MasonryModule } from 'angular2-masonry';
 
 //MOCKED BACK-END
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
@@ -26,6 +27,9 @@ import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { PanelComponent } from './panel.component';
+import { ModalComponent } from './modal.component';
+import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
+
 
 import { OrderByPipe } from '../pipes/sort.pipe';
 
@@ -36,6 +40,8 @@ import { OrderByPipe } from '../pipes/sort.pipe';
         ReactiveFormsModule,
         HttpModule,
         Ng2Webstorage,
+        ModalModule,
+        MasonryModule,
         //InMemoryWebApiModule.forRoot(InMemoryData),
         routing
     ],
@@ -50,6 +56,7 @@ import { OrderByPipe } from '../pipes/sort.pipe';
         DashboardComponent,
         LoginComponent,
         PanelComponent,
+        ModalComponent,
         //Pipes
         OrderByPipe
         ],

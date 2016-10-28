@@ -1,65 +1,76 @@
-<div class="dashboard">
-    <div class="menu-aside">
-        <div class="menu-aside__logo">
-            <span class="menu-aside--center">lounge</span>
-        </div>
-        <div class="menu-aside__list">
-            <a href="#" class="menu-aside__item">
-                <div class="menu-aside__ico">
-                    <i class="glyphicon glyphicon-picture menu-aside--center btn-lg" aria-hidden="true" name="albums"></i>
-                </div>
-                <div class="menu-aside__label">
-                    <label class="menu-aside--center" for="albums">albums</label>
-                </div>
-            </a>
-            <a href="#" class="menu-aside__item">
-                <div class="menu-aside__ico">
-                    <i class="glyphicon glyphicon-tasks menu-aside--center btn-lg" aria-hidden="true" name="summary"></i>
-                </div>
-                <div class="menu-aside__label">
-                    <label class="menu-aside--center" for="summary">summary</label>
-                </div>
-            </a>
-            <a href="#" class="menu-aside__item">
-                <div class="menu-aside__ico">
-                    <i class="glyphicon glyphicon-wrench menu-aside--center btn-lg" aria-hidden="true" name="settings"></i>
-                </div>
-                <div class="menu-aside__label">
-                    <label class="menu-aside--center" for="settings">settings</label>
-                </div>
-            </a>
+<div class="row">
+    <div class="dashboard">
+        <div class="menu-aside">
+            <div class="menu-aside__logo">
+                <span class="menu-aside--center">lounge</span>
+            </div>
+            <div class="menu-aside__list">
+                <a href="#" class="menu-aside__item">
+                    <div class="menu-aside__ico">
+                        <i class="glyphicon glyphicon-picture menu-aside--center btn-lg" aria-hidden="true" name="albums"></i>
+                    </div>
+                    <div class="menu-aside__label">
+                        <label class="menu-aside--center" for="albums">albums</label>
+                    </div>
+                </a>
+                <a href="#" class="menu-aside__item">
+                    <div class="menu-aside__ico">
+                        <i class="glyphicon glyphicon-tasks menu-aside--center btn-lg" aria-hidden="true" name="summary"></i>
+                    </div>
+                    <div class="menu-aside__label">
+                        <label class="menu-aside--center" for="summary">summary</label>
+                    </div>
+                </a>
+                <a href="#" class="menu-aside__item">
+                    <div class="menu-aside__ico">
+                        <i class="glyphicon glyphicon-wrench menu-aside--center btn-lg" aria-hidden="true" name="settings"></i>
+                    </div>
+                    <div class="menu-aside__label">
+                        <label class="menu-aside--center" for="settings">settings</label>
+                    </div>
+                </a>
+                
+            </div>
             
         </div>
-        
-    </div>
-    <div class="contener">
-        <div class="header"> 
-            <div class="header__body">
-                <i class="glyphicon glyphicon-menu-hamburger"></i>
+        <div class="contener">
+            <div class="header"> 
+                <div class="header__body">
+                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                </div>
             </div>
+            <div class="content">
+                <div class="content__headline">
+                    <h2>Dashboard</h2>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Choose Album</h3>
+                    </div>
+                    <div class="panel__container panel-body">
+                        <div class="album thumbnail" *ngFor="let album of albums" (click)="passAlbum(album)">
+                            <div class="album__cover">
+                                <img class="album__picture" height="100" [src]="this.getCoverPhoto(album.cover)" alt="album cover">
+                            </div>
+                            <div class="album__desc">
+                                <span>{{ album.title }}</span>
+                            </div>
+                        </div>
+                        <modal (emitAlbum)="sendAlbum($event)" [album]="album" [photos]="photos"></modal>
+                    </div>
+                </div>
+
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        [...]
+                    </div>
+                </div>
+
+            </div>
+            
         </div>
-        <div class="content">
-            <div class="content__headline">
-                <h2>Dashboard</h2>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-heading">
-                    <h3 class="panel-title">Choose Album</h3>
-                </div>
-                <div class="panel-body">
-                    <span class="glyphicon glyphicon-plus"></span>
-                </div>
-            </div>
-
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    [...]
-                </div>
-            </div>
-
-        </div>
-        
     </div>
 </div>
+
 

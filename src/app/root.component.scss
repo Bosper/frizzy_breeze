@@ -1,15 +1,29 @@
-.container-fluid {
-    text-align: center;
-}
-nav a {
+// .container-fluid {
+// }
+
+a {
     color: #000;
+    &:hover {
+        color:#000;
+        text-decoration: none;
+    }
+}
+
+nav a {
+
     &:hover {
         color: red;
     }
 }
 
-.logo {
-    &--text {
-        color: #000;
+.head {
+    text-align: center;
+    &__logo {
+        
+        &--text {
+            font-weight: bolder;
+        }
     }
-} 
+
+}
+
