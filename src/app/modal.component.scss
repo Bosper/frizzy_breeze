@@ -37,20 +37,21 @@ input[type=file] {
         // flex-wrap: wrap;
         border: 1px solid #ddd;
         border-radius: 4px;
-        padding: 5px;
+        padding: 15px;
         justify-content: space-between;
         max-height: 400px;
         overflow-y: scroll;
     }
 
     &__item {
+        display: inline;
         margin: 2.5px;
         width: 100px;
-        height: 100px;
+        height: auto;
         float: left;
 
         &--picture-photo {
-            width: 200px;
+            width: 100%;
             height: auto;
         }
 
@@ -66,6 +67,14 @@ input[type=file] {
             width: 200px;
             height: auto;
             opacity: 0.5;
+        }
+
+        &--no-album {
+            opacity: 0.6;
+
+            &:hover {
+                opacity: 1;
+            }
         }
     }
 }

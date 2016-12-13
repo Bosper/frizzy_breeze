@@ -1,4 +1,14 @@
-import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import { 
+    Component, 
+    OnInit, 
+    trigger,
+    state,
+    style,
+    transition,
+  	animate,
+    ElementRef,
+    ViewEncapsulation
+} from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AppService } from './app.service';
@@ -8,14 +18,44 @@ import { Photo } from './photo.class';
 import { Vocabulary } from './app.vocabulary';
 import { Test } from './test.class';
 
-let styles = require('./base.component.scss');
+let styles = [
+  require('./base.component.scss'),
+  require('font-awesome/css/font-awesome.css')
+];
+
 
 @Component({
   selector: 'main',
   providers: [ Vocabulary ], 
   template : require('./base.component.html') ,
   styleUrls: ['./base.component.scss'],
-  encapsulation: ViewEncapsulation.None
+  encapsulation: ViewEncapsulation.None,
+  animations: [
+        trigger('albumDescription', [
+            state('inactive', style({
+                bottom: '0px',
+                opacity: 0
+            })),
+            state('active', style({
+                bottom: '10%',
+                opacity: 1
+            })),
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-in'))
+        ]),
+        trigger('albumTitle', [
+            state('inactive', style({
+                marginTop: '0px',
+                opacity: 0
+            })),
+            state('active', style({
+                marginTop: '10%',
+                opacity: 1
+            })),
+            transition('inactive => active', animate('200ms ease-in')),
+            transition('active => inactive', animate('200ms ease-in'))
+        ])
+    ]
 })
 
 export class BaseComponent implements OnInit {
@@ -28,6 +68,16 @@ export class BaseComponent implements OnInit {
   error: any;
   public share: any = 'test';
   test: Test[];
+
+    active(album: Album, event: Event) { 
+        album.state = 'active';
+        console.log("ENTERED MOUSENTER");    
+    }
+
+    inactive(album: Album, event: Event) { 
+        album.state = 'inactive';
+        console.log("ENTERED LEAVE"); 
+    }
 
   logBaaS() {
     return this.appService.getTest() 
@@ -45,7 +95,7 @@ export class BaseComponent implements OnInit {
     //console.log("COVER: ", this.photos.filter( photo => photo.id === cover ));
     let photos:Photo[] = this.photos.filter( photo => photo.id === cover );
     let photo = JSON.stringify(photos[0].url);
-    console.log("COVER: ", photo);
+    //console.log("COVER: ", photo);
     
     return photos[0].url;
   }
@@ -75,8 +125,8 @@ export class BaseComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getAlbums();
     this.getPhotos();
+    this.getAlbums();
     this.getStartAlbums();
   }
 }

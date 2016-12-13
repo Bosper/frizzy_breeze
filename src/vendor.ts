@@ -15,3 +15,4 @@ import 'bootstrap-css-only';
 import 'ng2-bootstrap';
 import 'lodash';
 import 'masonry-layout';
+import 'lightbox2';

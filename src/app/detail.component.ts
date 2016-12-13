@@ -5,9 +5,13 @@ import { AppService } from './app.service';
 import { Album } from './album.class';
 import { Photo } from './photo.class';
 
+let lightboxCSS = require("lightbox2/dist/css/lightbox.css") + require("./detail.component.scss");
+//let detailComponentSCSS = require("./detail.component.scss");
+
 @Component({
     selector: 'album',
-    template : require('./detail.component.html')
+    template : require('./detail.component.html'),
+    styles: [lightboxCSS]
 })
 
 export class DetailComponent implements OnInit {
@@ -31,6 +35,20 @@ export class DetailComponent implements OnInit {
     
   }
 
+  lightboxOpen(photo:Photo) {
+      console.log("LIGHTBOX: ", photo);
+      let lightbox = $(".lightbox--container");
+
+    //   lightbox.css({
+    //       "height": $(document).height(),
+    //       "width": $(document).width(),
+    //       "opacity": 1
+    //   });
+
+
+      
+  }
+
     ngOnInit() {
 
         this.sub = this.route.params.subscribe(
@@ -47,7 +65,11 @@ export class DetailComponent implements OnInit {
                         .catch(this.error);
                 }
             }
-        )
+        );
+
+        let menu = $("header");
+        console.log(menu);
+        
         
     }
 }

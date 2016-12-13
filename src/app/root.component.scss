@@ -1,29 +1,103 @@
-// .container-fluid {
-// }
+@import 'theme.scss';
 
-a {
-    color: #000;
-    &:hover {
-        color:#000;
-        text-decoration: none;
-    }
+.header {
+    position: fixed;
+    z-index: 100;
+    width: 100%;
 }
 
-nav a {
+.header-container {
+    display: inline-flex;
+    align-items: center;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+    background: white;
+    //border: 1px solid red;
+    justify-content: space-between;
+    width: 100%;
 
-    &:hover {
-        color: red;
+    &__logo_nav {
+        display: inline-flex;
+        align-items: center;
+        //border: 1px solid green;
     }
+
+    &__social {
+        float: right;
+    }
+    
 }
 
-.head {
-    text-align: center;
-    &__logo {
-        
-        &--text {
-            font-weight: bolder;
+.aside-container {
+    display: block;
+}
+
+.nav {
+    display: inline;
+    //border: 1px solid blue;
+
+    &--main {
+        display: table-cell;
+    }
+
+    @media #{$desktop} {
+        display: flex;
+    }
+
+    &__item {
+    
+
+    }
+
+    &__link {
+        color: #333;
+        text-transform: uppercase;
+
+        &:hover, :focus {
+            color: red;
         }
     }
+}
 
+.nav--aside {
+    // background-image: url("src/assets/images/4.jpg");
+    // background-repeat: repeat-y repeat-x; 
+    padding-left: 15px;
+    padding-right: 15px;
+
+}
+
+.logo {
+    text-align: left; 
+    margin: 0 20px 0 0;
+    
+    &__text {
+        display: inline;
+        position: relative;
+        font: 64px Helvetica, Sans-serif;
+        letter-spacing: -4px;
+        color: rgba(0, 255, 255, 0.5);
+        font-weight: bold;
+
+        &:after {
+            position: absolute;
+            left: 4px;
+            top: 3px;
+            content: "LOUNGE EXPOSURE";
+            white-space: nowrap;
+            color: rgba(255, 0, 0, 0.5)
+        }
+
+        &:hover, :focus {
+            text-decoration: none;
+            //background: rgba(255, 0, 255, 1);
+        }
+    }
+}
+
+a:hover, a:focus {
+    text-decoration: none;
 }
 

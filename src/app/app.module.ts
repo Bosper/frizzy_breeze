@@ -5,9 +5,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 
 //THIRD PARTY MODULES
-//import { CoolStorageModule } from 'angular2-cool-storage';
 import { Ng2Webstorage } from 'ng2-webstorage';
 import { MasonryModule } from 'angular2-masonry';
+import { FileSelectDirective, FileDropDirective, FileUploader } from 'ng2-file-upload/ng2-file-upload';
 
 //MOCKED BACK-END
 import { InMemoryWebApiModule } from 'angular2-in-memory-web-api';
@@ -28,6 +28,7 @@ import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { PanelComponent } from './panel.component';
 import { ModalComponent } from './modal.component';
+import { ModalSmallComponent } from './modal-small.component';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
 
 
@@ -57,6 +58,10 @@ import { OrderByPipe } from '../pipes/sort.pipe';
         LoginComponent,
         PanelComponent,
         ModalComponent,
+        ModalSmallComponent,
+        //Directives
+        FileSelectDirective,
+        FileDropDirective,
         //Pipes
         OrderByPipe
         ],

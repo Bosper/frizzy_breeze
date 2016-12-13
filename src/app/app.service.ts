@@ -27,10 +27,11 @@ export class AppService {
 
     private newPhotoUrl = "http://127.0.0.1:3005/test";
     private API_END_POINT = "http://127.0.0.1:3005/api";
+    //private API_END_POINT = "/api";
 
     private headers = new Headers({
             'Content-Type': 'application/json',
-            'Access-Control-Allow-Origin': 'http://127.0.0.1:3005'
+            'Access-Control-Allow-Origin': 'http://127.0.0.1:8080'
         });
 
     getTest(): Promise<Test[]> {
@@ -40,13 +41,6 @@ export class AppService {
             .then( (res:Response) => res.json() as Test[] )
             .catch(this.handleError);
     }
-
-    // getTest(): Observable<Test[]> {
-    //     return this.http
-    //         .get( this.newPhotoUrl )
-    //         .map( (res:Response) => res.json().data )
-    //         .catch(this.handleError);
-    // }
 
     getNavigation(): Promise<Navigation[]>  {
         return this.http
@@ -74,6 +68,7 @@ export class AppService {
             .then((res: Response) => res.json() as Photo[])
             .catch(this.handleError);
     }
+
 
     getStartAlbums() {
         return this.getAlbums()
@@ -127,7 +122,6 @@ export class AppService {
     }
 
     //DASHBOARD
-
     createAlbum(album: Album): Observable<Status> {
         let body = JSON.stringify(album);
 
@@ -143,6 +137,16 @@ export class AppService {
         return this.http
             .post(this.API_END_POINT + '/updateAlbum', body, { headers: this.headers })
             .map((res: Response) => res.json() as Status)
+            .catch(this.handleError);
+    }
+
+    deleteAlbum(album:Album) {
+        let body = JSON.stringify(album);
+        console.log(body);
+
+        return this.http
+            .post(this.API_END_POINT + '/deleteAlbum', body, { headers: this.headers })
+            .map((res:Response) => res.json())
             .catch(this.handleError);
     }
 

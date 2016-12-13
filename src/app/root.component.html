@@ -1,15 +1,44 @@
-<div class="container-fluid">
-    <header *ngIf="x" class="head">
-        <div class="head__logo">
-            <a routerLink="/"><h1 class="head__logo--text">{{title | uppercase}}</h1></a>
+    <header class="header" *ngIf="x">
+        <div class="header-container">
+            <div class="header-container__logo_nav">
+                <div class="logo">
+                    <a routerLink="/"><h1 class="logo__text">{{ title | uppercase }}</h1></a>
+                </div>
+                
+                <nav>
+                    <ul class="nav nav--main">
+                        <li class="nav__item">
+                            <a class="nav__link" routerLink="/about-me">about me</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" routerLink="/bio">bio</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" routerLink="/case-study">case study</a>
+                        </li>
+                        <li class="nav__item">
+                            <a class="nav__link" routerLink="/contact">case study</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+               
+            <div class="header-container__social">
+                <social></social> 
+            </div>
+        </div>
+        <div class="aside-container">
+            <aside>
+                <ul class="nav nav--aside">
+                    <li *ngFor="let nav of navigation" class="nav__item">
+                        <a class="nav__link" routerLink="{{ nav.url }}/{{ nav.category }}">{{ nav.title }}</a>
+                    </li>
+                </ul>
+            </aside>
         </div>
         
-        <nav>
-            <a *ngFor="let nav of navigation" routerLink="{{ nav.url }}/{{ nav.category }}">{{ nav.title }}</a>
-            <a routerLink="/about-me">about-me</a>
-        </nav>
     </header>
-    <router-outlet></router-outlet>
-    <social *ngIf="x"></social>
-</div>
+    <div class="container-fluid">
+        <router-outlet></router-outlet>
+    </div>
 

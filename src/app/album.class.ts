@@ -10,4 +10,6 @@ export class Album {
   order: number;
   active: boolean;
   cover: number;
+  state: string;
 }
+

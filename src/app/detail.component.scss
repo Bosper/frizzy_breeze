@@ -1,0 +1,38 @@
+.lightbox {
+    
+    &--container {
+        position: absolute;
+        width: 100%;
+        top: 0;
+        background: rgba(0, 0, 0, 0.8);
+        opacity: 0;
+    }
+
+    &--preview {
+        position: relative;
+        display: flex;
+        width:80%;
+        height: auto;
+        margin: auto;
+    }
+}
+
+.photos {
+    position: relative;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    //border: 1px solid red;
+    text-align: center;
+    align-content: center;
+
+    &__item {
+        position: relative;
+        margin-bottom: 20px;
+        //border: 1px solid blue;
+    }
+
+    &__image {
+        width: 60%;
+    }
+}

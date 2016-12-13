@@ -8,16 +8,15 @@ import { Navigation } from './navigation.class';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 
-//import './root.component.scss';
 import * as _ from 'lodash';
 
-    
+let rootSCSS = require("./root.component.scss");
 
 @Component({
     selector: 'app',
     template : require('./root.component.html'),
-    styleUrls: ["./root.component.scss"],
-    encapsulation: ViewEncapsulation.None
+    styles: [rootSCSS]
+    //encapsulation: ViewEncapsulation.None
 })
 
 export class RootComponent implements OnInit {
@@ -38,9 +37,9 @@ export class RootComponent implements OnInit {
             .catch(error => this.error = error)
     }
 
-    showOnlyDashboard(dashboard: boolean) {
-        console.log("DASHBOARD: ", dashboard);
-    }
+    // showOnlyDashboard(dashboard: boolean) {
+    //     console.log("DASHBOARD: ", dashboard);
+    // }
 
     hideHeader() {
         let href:string = window.location.href;

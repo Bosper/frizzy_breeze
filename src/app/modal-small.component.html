@@ -1,0 +1,25 @@
+<div bsModal #smModal="bs-modal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-sm" *ngIf="photo">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" aria-label="Close" (click)="smModal.hide()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        <h4 class="modal-title">Small modal</h4>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="photoForm">
+          <fieldset class="form-group">
+                <label for="active">Display: </label>
+                <input type="radio" name="active" [value]="true" formControlName="active" [(ngModel)]="photo.active"><span> Yes</span>&nbsp;
+                <input type="radio" name="active" [value]="false" formControlName="active" [(ngModel)]="photo.active"><span> No</span> 
+            </fieldset>
+            <fieldset class="form-group">
+                <label for="Order">Order: </label>
+                <input type="text" name="order" formControlName="order" [(ngModel)]="photo.order">
+            </fieldset>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

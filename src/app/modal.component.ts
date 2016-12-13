@@ -28,7 +28,6 @@ export class ModalComponent implements OnInit {
     albumPhotos: Photo[];
     albumNotPhotos: Photo[];
     editAlbum: boolean;
-    editedPhotos: number[];
     cover: Photo;
     isCover: boolean = false;
 
@@ -48,12 +47,11 @@ export class ModalComponent implements OnInit {
         });
 
         this.emitAlbum = new EventEmitter();
-        this.editedPhotos = [];
     }
 
-    passAlbum(album: FormGroup) {
+    saveAlbum(album: FormGroup) {
         let newAlbum: Album = album.value;
-        console.log(newAlbum);
+        console.log("SAVEALBUM: ", newAlbum);
         this.emitAlbum.emit(newAlbum);
     }
 
@@ -63,45 +61,40 @@ export class ModalComponent implements OnInit {
 
     createAlbum() {
         this.album = new Album();
-        console.log(this.album);
+        this.album.cover = 1;
+        console.log("CREATE NEW ALBUM: ", this.album);
         this.editAlbum = false;
-        console.log("EDIT: ", this.editAlbum);
         this.modal.show();
+    }
+
+    getPhotos() {
+        this.appService.getPhotos()
+            .then( photos => this.photos = photos );
     }
 
     modifyAlbum(album: Album) {
-
-        let coverImage: Photo;
-
+        this.getPhotos();
         this.album = album;
         this.editAlbum = true;
         this.getAlbumPhotos();
-        
         this.albumNotPhotos = _.differenceWith(this.photos, this.albumPhotos, _.isEqual);
-        // coverImage = this.albumNotPhotos.find( photo => photo.id === 1 );
-        // this.albumNotPhotos.splice(this.albumNotPhotos.indexOf(coverImage), 1);
-        console.log("+: ", this.albumPhotos, this.albumNotPhotos);
-        this.selectCover();
+        console.log("MODIFYALBUM: ALBUM PHOTOS: ", this.albumPhotos, "PHOTOS NOT IN ALBUM: ", this.albumNotPhotos);
+        this.findCurrentCover();
         this.modal.show();
     }
 
-    selectCover() {
-        //console.log("SELECT COVER: ALBUM PHOTOS: ", albumPhotos);
-        
-        // if (this.album.cover && this.album.cover != 1) {
-            this.cover = this.albumPhotos.find( photo => photo.id === this.album.cover );
-            console.log("COVER: ", this.cover);
-        // } else { 
-        //     this.cover = new Photo();
-        //     this.cover.id = 0; 
-        // }
+
+
+    findCurrentCover() {
+        this.cover = this.albumPhotos.find( photo => photo.id === this.album.cover );
+        console.log("FIND CURRENT COVER: ", this.cover);
     }
 
 
-    choseCover(photo:Photo) {
+    selectCover(photo:Photo) {
         this.cover = photo;
         this.album.cover = this.cover.id;
-        console.log(this.cover);
+        console.log("SELECTED COVER: ", this.cover);
         
     }
 
@@ -111,53 +104,27 @@ export class ModalComponent implements OnInit {
         console.log("GET ALBUM PHOTOS: ALBUM PHOTOS ID: ", albumPhotosId);      
 
             for (let i = 0; i < albumPhotosId.length; i++) {
-                console.log("FAAAIL!", albumPhotosId[i], this.photos);
-
                 let element = this.photos.find(photos => photos.id === albumPhotosId[i])
                 activePhotos.push(element);
-
             }
             this.albumPhotos = activePhotos;
-
-            // let coverImage = activePhotos.find( photo => photo.id === 1 );
-            // activePhotos.splice(activePhotos.indexOf(coverImage), 1);
-            console.log("GET ALBUM PHOTOS: ", albumPhotosId, activePhotos);
-            
+            console.log("GET ALBUM PHOTOS: ", activePhotos);   
 
     }
 
     checkPhoto(photo:Photo, albumNotPhotos:Photo[]) {
         let albumPhotos: Photo[];
         albumPhotos = this.albumPhotos;
+
         if (this.album.photoId.indexOf(photo.id) === -1) {
             this.album.photoId.push(photo.id);
             this.albumNotPhotos.splice(albumNotPhotos.indexOf(photo), 1);
-            //console.log("ALBUM NOT PHOTOS: ", albumNotPhotos);
-
         }
         else {
             this.album.photoId.splice(this.album.photoId.indexOf(photo.id), 1);
             this.albumNotPhotos = _.concat([photo], this.albumNotPhotos);
-        }
-        
+        }  
         this.getAlbumPhotos();
-        //console.log("ALBUM PHOTO ID: ", this.album.photoId);
-
-    }
-
-    checkAlbum() {
-        console.log(this.album);
-        
-    }
-
-    pushPhotos():void {
-        let temp = _.union(this.album.photoId, this.editedPhotos);
-        this.album.photoId = temp;
-        this.editedPhotos = [];
-
-        console.log("ALBUM: ", this.album.photoId);
-        console.log("Photos: ", temp);
-        
     }
 
     ngOnInit() {

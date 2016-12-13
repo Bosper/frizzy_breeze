@@ -1,8 +1,16 @@
-<h1>Detail Component</h1>
-<div *ngIf="album">
-    <span>{{ album.title }}</span>
-    <div *ngFor="let photo of activePhotos">
-        <span>{{ photo.url }}</span>
-        <img src="{{ photo.url }}" alt="" />
+<!--<div class="row">
+    <div class="lightbox--container">
+        <div class="lightbox--preview">
+            <p style="margin: auto;">BLABLABLA</p>
+        </div>
+    </div>
+</div>-->
+<div class="photos" *ngIf="album">
+    <h2>{{ album.title }}</h2>
+    <div class="photos__item" *ngFor="let photo of activePhotos">
+
+        <a href="{{ photo.url }}" data-lightbox="roadtrip">
+            <img class="photos__image" src="{{ photo.url }}" alt="" />
+        </a>
     </div>
 </div>

@@ -1,4 +1,27 @@
-<h1>Category Component</h1>
-<ul>
-    <li *ngFor="let album of categoryAlbums" (click)="goDetail(album)">{{ album.title | uppercase }}{{ album.desc }}</li>
-</ul>
+<div *ngIf="categoryAlbums != null">
+    <masonry [useImagesLoaded]="true" class="album-container">
+        <masonry-brick 
+        *ngFor="let album of categoryAlbums | orderBy: ['activeAlbums']"  
+        class="album__item" 
+        id="{{album.id}}" 
+        (mouseenter)="active(album, $event)" 
+        (mouseleave)="inactive(album, $event)">
+            <div class="album__item--cover-container">
+                <img class="album__item--cover" [src]="this.getCoverPhoto(album.cover)" alt="album cover">
+                <div class="album__item--story">
+                    <div class="album__item--title" [@albumTitle]="album.state">
+                        {{ album.title | uppercase }}
+                    </div>
+                    <div class="album__item--description" [@albumDescription]="album.state">
+                        <div class="item-desc">
+                            {{ album.desc }}
+                        </div>
+                        <div class="item-button">
+                            <input class="btn btn-success album__item--button" type="button" value="Enter" (click)="goDetail(album)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </masonry-brick>
+    </masonry>
+</div>

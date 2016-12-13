@@ -29,26 +29,20 @@
             <fieldset class="form-group" *ngIf="editAlbum">
                 <label for="images">Album images: </label>
                 <div class="ds-photo">
-                    <div class="ds-photo__container col-sm-5">
-                        <div class="ds-photo__item" *ngFor="let photo of albumNotPhotos" (click)="checkPhoto(photo, albumNotPhotos)">
-                            <div class="ds-photo__item--cover">
-                                <img class="ds-photo__item--picture-photo" height="100" [src]="photo.url" alt="">
+                    <masonry [useImagesLoaded]="true" class="ds-photo__container col-sm-5">
+                        <masonry-brick class="ds-photo__item" *ngFor="let photo of albumNotPhotos" (click)="checkPhoto(photo, albumNotPhotos)">
+                            <div>
+                                <img class="ds-photo__item--picture-photo ds-photo__item--no-album" [src]="photo.url" alt="">
                             </div>
-                        </div>
-                    </div>
-                    <!--<div class="ds-photo__container col-sm-2">
-                        <button [type]="text" (click)="pushPhotos()" style="height: 50px;">Push It!</button>
-                        <button [type]="text" (click)="checkAlbum()" style="height: 50px;">Check</button>
-                        <button type="text" (click)="difference(albumNotPhotos)">Difference!</button>
-                    </div>-->
-                    <div class="ds-photo__container col-sm-5">
-                        <div class="ds-photo__item" *ngFor="let albumPhoto of albumPhotos" (click)="checkPhoto(albumPhoto)">
-                            <div class="ds-photo__item--cover">
+                        </masonry-brick>
+                    </masonry>
+                    <masonry [useImagesLoaded]="true" class="ds-photo__container col-sm-5">
+                        <masonry-brick class="ds-photo__item" *ngFor="let albumPhoto of albumPhotos" (click)="checkPhoto(albumPhoto)">
+                            <div>
                                 <img class="ds-photo__item--picture-photo" [src]="albumPhoto.url" alt="">
                             </div>
-
-                        </div>
-                    </div>
+                        </masonry-brick>
+                    </masonry>
                     
                 </div>
                 <input type="hidden" class="form-control" name="images" formControlName="photoId" [(ngModel)]="album.photoId">
@@ -72,12 +66,12 @@
                 <input type="radio" name="active" [value]="true" formControlName="active" [(ngModel)]="album.active"><span> Yes</span>&nbsp;
                 <input type="radio" name="active" [value]="false" formControlName="active" [(ngModel)]="album.active"><span> No</span>  
             </fieldset>
-            <fieldset class="form-group">
+            <fieldset class="form-group" *ngIf="editAlbum">
                 <label for="active">Cover: </label>
                 <div class="ds-photo__container col-sm-12">
                     <div class="ds-photo__item" *ngFor="let albumPhoto2 of albumPhotos">
                         <div class="ds-photo__item--cover">
-                            <img class="ds-photo__item--cover-photo" [src]="albumPhoto2.url" alt="" (click)="choseCover(albumPhoto2)" [class.selected]="album.cover === albumPhoto2.id">
+                            <img class="ds-photo__item--cover-photo" [src]="albumPhoto2.url" alt="" (click)="selectCover(albumPhoto2)" [class.selected]="album.cover === albumPhoto2.id">
                         </div>
                     </div>
                     
@@ -85,7 +79,7 @@
                 <input type="text" name="cover" formControlName="cover" [(ngModel)]="album.cover">
             </fieldset>
             <fieldset class="form-group">
-	            <button type="submit" class="btn btn-success" (click)="passAlbum(albumForm)">Save</button>
+	            <button type="submit" class="btn btn-success" (click)="saveAlbum(albumForm)">Save</button>
                 <button type="text" class="btn btn-default" (click)="closeModal()">Discard</button>
             </fieldset>
         </form>

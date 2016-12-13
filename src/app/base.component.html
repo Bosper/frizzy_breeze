@@ -1,26 +1,30 @@
 <div *ngIf="activeAlbums != null">
-    <masonry class="album-container">
-        <masonry-brick *ngFor="let album of activeAlbums | orderBy: ['activeAlbums']" (click)="goDetail(album)" class="album__item">
+    <masonry [useImagesLoaded]="true" class="album-container">
+        <masonry-brick 
+        *ngFor="let album of activeAlbums | orderBy: ['activeAlbums']" 
+        class="album__item"
+        (mouseenter)="active(album, $event)" 
+        (mouseleave)="inactive(album, $event)">
             <div class="album__item--cover-container">
                 <img class="album__item--cover" [src]="this.getCoverPhoto(album.cover)" alt="album cover">
-            </div>
-            <div class="album__item--story">
-                <div class="album__item--title">
-                    {{ album.title | uppercase }}
-                </div>
-                <div class="album__item--desc">
-                    {{ album.desc }}
+                <div class="album__item--story">
+                    <div class="album__item--title" [@albumTitle]="album.state">
+                        {{ album.title | uppercase }}
+                    </div>
+                    <div class="album__item--description" [@albumDescription]="album.state">
+                        <div class="item-desc">
+                            {{ album.desc }}
+                        </div>
+                        <div class="item-button">
+                            <input class="btn btn-success album__item--button" type="button" value="Enter" (click)="goDetail(album)">
+                        </div>
+                    </div>
                 </div>
             </div>
         </masonry-brick>
     </masonry>
-
-
 </div>
 
-<button type="text" (click)="logAlbums()">GET Albums</button>
-<button type="text" (click)="logPhotos()">GET Photos</button>
-<button type="text" (click)="logBaaS()">TEST API</button>
 
 <div *ngIf="test">
     <div *ngFor="let item of test">

@@ -22,12 +22,6 @@ export class DashboardComponent implements OnInit {
         this.dashboard = true;
     } 
 
-    // changeView(logged: any) {
-    //     console.log("LOGGED: ", logged);
-    //     this.isLogged = logged;
-    //     this.token = this.localSession.retrieve('token');
-    // }
-
     changeView() {
         let token = this.localSession.retrieve('token');
         if (token) {
@@ -37,10 +31,10 @@ export class DashboardComponent implements OnInit {
                     if (result.success) {
                         this.dashboard = true;
                         this.isLogged = true;
-                        console.log("DASHBOARD LOG TRUE", this.isLogged);
+                        console.log("CHANGEVIEW: DASHBOARD LOGGED", this.isLogged);
                     } else {
                         this.isLogged = false;
-                        console.log("DASHBOARD LOG FALSE", this.isLogged);
+                        console.log("CHANGEVIEW: DASHBOARD LOGGED", this.isLogged);
                     }
                 })
             
@@ -53,22 +47,7 @@ export class DashboardComponent implements OnInit {
         this.appService.verifyToken(token)
             .subscribe(result => console.log(result))
     }
-
-
-
-
-
-    // checkToken() {
-    //     this.appService.getToken(this.token)
-    //         .then( result => {
-    //             this.token === result;
-    //             this.appService.verifyToken(this.token)
-    //                 .subscribe( result => console.log(result))
-    //         });
-    // }
-
-
-    
+   
     ngOnInit() {
         this.changeView();
     }
