@@ -12,7 +12,7 @@ a {
 position: absolute;
 width: 100%;
 //height: 100%;
-border: 1px solid blue;
+//border: 1px solid blue;
 display: flex;
 flex-direction: row;
 }
@@ -32,13 +32,20 @@ flex-direction: row;
         margin: 15px 5px 50px 5px;
     }
 
+    &__list {
+        padding: 0;
+    }
+
     &__item {
         display: flex;
         flex-direction: row;
-        border: 1px solid green;
-        // &:hover {
-        //     background: #99ccff;
-        // }
+        //border: 1px solid green;
+        list-style: none;
+        cursor: pointer;
+        &:hover {
+            background: #99ccff;
+            color: black;
+        }
     }
 
     &__ico {
@@ -59,19 +66,25 @@ flex-direction: row;
     &--center {
          margin: auto;
     }
+
+    &__toggle {
+        cursor: pointer;
+        padding:20px;
+    }
 }
 
 .contener {
-    border: 1px solid red;
+    //border: 1px solid red;
     display: flex;
     flex-direction: column;
-    width: 100%
+    width: 100%;
+    height: 100vh;
 
 }
 
 .header {
     height: 50px;
-    border: 1px solid black;
+    //border: 1px solid black;
     background: #FFF;
     padding: 15px 40px;
 
@@ -81,7 +94,7 @@ flex-direction: row;
 }
 
 .content {
-    border: 1px solid peru;
+    //border: 1px solid peru;
     background: #EEE;
     //height: 100%;
     padding: 0 40px;

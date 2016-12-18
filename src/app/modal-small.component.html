@@ -10,6 +10,9 @@
       <div class="modal-body">
         <form [formGroup]="photoForm">
           <fieldset class="form-group">
+            <input type="text" formControlName="id" [(ngModel)]="photo.id" disabled>
+          </fieldset>
+          <fieldset class="form-group">
                 <label for="active">Display: </label>
                 <input type="radio" name="active" [value]="true" formControlName="active" [(ngModel)]="photo.active"><span> Yes</span>&nbsp;
                 <input type="radio" name="active" [value]="false" formControlName="active" [(ngModel)]="photo.active"><span> No</span> 
@@ -18,6 +21,10 @@
                 <label for="Order">Order: </label>
                 <input type="text" name="order" formControlName="order" [(ngModel)]="photo.order">
             </fieldset>
+            <fieldset class="form-group">
+              <input type="text" formControlName="url" [(ngModel)]="photo.url" disabled>
+            </fieldset>
+            <input class="btn btn-success" type="submit" name="submit" value="Send!" (click)="sendMidifiedPhoto(photoForm)">
         </form>
       </div>
     </div>

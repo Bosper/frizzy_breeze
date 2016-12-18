@@ -23,10 +23,12 @@ import { BaseComponent } from './base.component';
 import { DetailComponent } from './detail.component';
 import { CategoryComponent } from './category.component';
 import { AboutComponent } from './about.component';
+import { ContactComponent } from './contact.component';
 import { SocialComponent } from './social.component';
 import { DashboardComponent } from './dashboard.component';
 import { LoginComponent } from './login.component';
 import { PanelComponent } from './panel.component';
+import { PanelSettingsComponent } from './panel-settings.component';
 import { ModalComponent } from './modal.component';
 import { ModalSmallComponent } from './modal-small.component';
 import { ModalModule } from 'ng2-bootstrap/ng2-bootstrap';
@@ -52,11 +54,13 @@ import { OrderByPipe } from '../pipes/sort.pipe';
         BaseComponent, 
         DetailComponent, 
         AboutComponent, 
+        ContactComponent,
         CategoryComponent, 
         SocialComponent, 
         DashboardComponent,
         LoginComponent,
         PanelComponent,
+        PanelSettingsComponent,
         ModalComponent,
         ModalSmallComponent,
         //Directives

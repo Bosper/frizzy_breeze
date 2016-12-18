@@ -8,16 +8,13 @@
                 <nav>
                     <ul class="nav nav--main">
                         <li class="nav__item">
-                            <a class="nav__link" routerLink="/about-me">about me</a>
-                        </li>
-                        <li class="nav__item">
                             <a class="nav__link" routerLink="/bio">bio</a>
                         </li>
                         <li class="nav__item">
                             <a class="nav__link" routerLink="/case-study">case study</a>
                         </li>
                         <li class="nav__item">
-                            <a class="nav__link" routerLink="/contact">case study</a>
+                            <a class="nav__link" routerLink="/contact">contact</a>
                         </li>
                     </ul>
                 </nav>
@@ -30,7 +27,7 @@
         <div class="aside-container">
             <aside>
                 <ul class="nav nav--aside">
-                    <li *ngFor="let nav of navigation" class="nav__item">
+                    <li *ngFor="let nav of navigation" class="nav__item nav--aside__item">
                         <a class="nav__link" routerLink="{{ nav.url }}/{{ nav.category }}">{{ nav.title }}</a>
                     </li>
                 </ul>

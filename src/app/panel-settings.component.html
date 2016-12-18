@@ -1,0 +1,42 @@
+<div class="content">
+    <div class="content__headline">
+        <h2>Panel Settings</h2>
+    </div>
+    <div class="panel panel-default">
+        <div class="panel-heading">
+            <h3 class="panel-title">Edit Pages</h3>
+        </div>
+        <div class="panel__container panel-body">
+            <div class="pages-list col-md-2">
+                <button class="pages-list__item btn btn-default" *ngFor="let page of pages" (click)="showModel(page)">{{ page.title }}</button>
+            </div>
+            <div class="col-md-10">
+                <form [formGroup]="pageForm" *ngIf="chosenPage" (submit)="onSubmit(pageForm)">
+                    <fieldset class="form-group">
+                        <label for="id">ID</label>
+                        <input type="number" name="id" [(ngModel)]="chosenPage.id" class="form-control" formControlName="id">  
+                    </fieldset>
+                    
+                    <fieldset class="form-group">
+                        <label for="title">Title</label>
+                        <input type="text" name="title" [(ngModel)]="chosenPage.title" class="form-control" formControlName="title">
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="paragraph1">Paragraph One</label>
+                        <textarea [(ngModel)]="chosenPage.paragraph1" class="form-control" formControlName="paragraph1" name="paragraph1"></textarea>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="paragraph2">Paragraph Two</label>
+                        <textarea [(ngModel)]="chosenPage.paragraph2" class="form-control" formControlName="paragraph2" name="paragraph2"></textarea>
+                    </fieldset>
+                    <fieldset class="form-group">
+                        <label for="paragraph3">Paragraph Three</label>
+                        <textarea [(ngModel)]="chosenPage.paragraph3" class="form-control" formControlName="paragraph3" name="paragraph3"></textarea>
+                    </fieldset>
+                    <input type="submit" class="btn btn-success" name="update" value="Update">
+                    <input type="button" class="btn btn-default" name="reset" value="Reset">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,1 +1,25 @@
-<h1>About Component</h1>
+<section id="bio">
+    <div class="bio-container" *ngFor="let page of pages">
+        <img class="media" [src]="page.imgMedia" alt="">
+        <div class="paragraph">
+            <p class="paragraph__el">{{ page.paragraph1 }}</p>
+            <p class="paragraph__el">{{ page.paragraph2 }}</p>
+        </div>
+        <div class="thumb">
+            <div class="thumb__el">
+                <img [src]="page.imgThumb1" class="thumb__img" alt="test">
+            </div>
+            <div class="thumb__el">
+                <img [src]="page.imgThumb2" class="thumb__img" alt="test2">
+            </div>
+            <div class="thumb__el">
+                <img [src]="page.imgThumb3" class="thumb__img" alt="test3">
+            </div>
+        </div>
+        <div class="paragraph">
+            <p class="paragraph__el">{{ page.paragraph3 }}</p>
+        </div>
+    </div>
+    
+
+</section>

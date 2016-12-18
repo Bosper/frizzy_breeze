@@ -1,44 +1,30 @@
 <div class="row">
     <div class="dashboard">
-        <div class="menu-aside">
+        <div class="menu-aside" [@menuPanel]="menuState">
             <div class="menu-aside__logo">
                 <span class="menu-aside--center">lounge</span>
             </div>
-            <div class="menu-aside__list">
-                <a href="#" class="menu-aside__item">
+            <ul class="menu-aside__list">
+                <li *ngFor="let menuItem of panelMenu" class="menu-aside__item" (click)="changeView(menuItem)">
                     <div class="menu-aside__ico">
-                        <i class="glyphicon glyphicon-picture menu-aside--center btn-lg" aria-hidden="true" name="albums"></i>
+                        <i class="glyphicon {{ menuItem.class }} menu-aside--center btn-lg" aria-hidden="true"></i>
                     </div>
                     <div class="menu-aside__label">
-                        <label class="menu-aside--center" for="albums">albums</label>
+                        <label class="menu-aside--center">{{ menuItem.name }}</label>
                     </div>
-                </a>
-                <a href="#" class="menu-aside__item">
-                    <div class="menu-aside__ico">
-                        <i class="glyphicon glyphicon-tasks menu-aside--center btn-lg" aria-hidden="true" name="summary"></i>
-                    </div>
-                    <div class="menu-aside__label">
-                        <label class="menu-aside--center" for="summary">summary</label>
-                    </div>
-                </a>
-                <a href="#" class="menu-aside__item">
-                    <div class="menu-aside__ico">
-                        <i class="glyphicon glyphicon-wrench menu-aside--center btn-lg" aria-hidden="true" name="settings"></i>
-                    </div>
-                    <div class="menu-aside__label">
-                        <label class="menu-aside--center" for="settings">settings</label>
-                    </div>
-                </a>
-            </div>
-            
+                </li>
+            </ul>
         </div>
+
         <div class="contener">
             <div class="header"> 
                 <div class="header__body">
-                    <i class="glyphicon glyphicon-menu-hamburger"></i>
+                    <span class="menu-aside__toggle" (click)="toggleState()">
+                        <i class="glyphicon glyphicon-menu-hamburger"></i>
+                    </span>
                 </div>
             </div>
-            <div class="content">
+            <div class="content" *ngIf="panel_1" >
                 <div class="content__headline">
                     <h2>Dashboard</h2>
                 </div>
@@ -78,7 +64,7 @@
                                 <img class="photo__picture" height="100" [src]="photo.url" alt="photo">
                             </div>
                         </div>
-                        <modal-small></modal-small>
+                        <modal-small (emitPhoto)="updatePhoto($event)"></modal-small>
                     </div>
                 </div>
 
@@ -177,6 +163,14 @@
                 </div>
 
             </div>
+
+            <div class="content" *ngIf="panel_2">
+                <div class="content__headline">
+                    <h2>Panel Summary</h2>
+                </div>
+            </div>
+
+            <panel-settings *ngIf="panel_3"></panel-settings>
             
         </div>
     </div>

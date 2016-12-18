@@ -5,9 +5,9 @@
         </div>
     </div>
 </div>-->
-<div class="photos" *ngIf="album">
-    <h2>{{ album.title }}</h2>
-    <div class="photos__item" *ngFor="let photo of activePhotos">
+<div class="photos" *ngIf="activePhotos">
+    <h2>{{ album.title | uppercase }}</h2>
+    <div class="photos__item" *ngFor="let photo of activePhotos | orderBy: ['activePhotos']">
 
         <a href="{{ photo.url }}" data-lightbox="roadtrip">
             <img class="photos__image" src="{{ photo.url }}" alt="" />

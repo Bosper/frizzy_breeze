@@ -67,6 +67,15 @@
     padding-left: 15px;
     padding-right: 15px;
 
+    &__item {
+        margin-top: 10px;
+        margin-bottom: 10px;
+        background: #FFF;
+        box-shadow: 0 1px 3px rgba(34, 25, 25, 0.4);
+        font: 11px/12px 'Helvetica';
+        line-height: 5px;
+    }
+
 }
 
 .logo {

@@ -9,6 +9,8 @@ import { Navigation } from './navigation.class';
 import { User } from './login.model';
 import { Token } from './token.model';
 import { Status } from './status.model';
+import { Page } from './page.model';
+import { PanelMenu } from './panelmenu.model';
 
 import 'rxjs/add/operator/map';
 import { Subject }    from 'rxjs/Subject';
@@ -69,7 +71,6 @@ export class AppService {
             .catch(this.handleError);
     }
 
-
     getStartAlbums() {
         return this.getAlbums()
             .then( (albums) => albums.filter( startAlbum => startAlbum.start === true && startAlbum.active === true ))
@@ -101,6 +102,15 @@ export class AppService {
             })
     }
 
+    //PAGES
+
+    getBio():Observable<Page> {
+        return this.http
+            .get( this.API_END_POINT + '/bio')
+            .map( (res:Response) => res.json() as Page)
+            .catch(this.handleError);
+    }
+
     //AUTHORISATION
     signIn(userData: Object): Observable<any> {
         let body = JSON.stringify(userData);
@@ -121,7 +131,14 @@ export class AppService {
 
     }
 
-    //DASHBOARD
+    //DASHBOARD ALBUMS & PHOTOS
+    getPanelMenu(): Observable<PanelMenu[]> {
+        return this.http
+            .get(this.API_END_POINT + '/panelnav')
+            .map((res:Response) => res.json() as PanelMenu[])
+            .catch(this.handleError);
+    }
+
     createAlbum(album: Album): Observable<Status> {
         let body = JSON.stringify(album);
 
@@ -140,6 +157,15 @@ export class AppService {
             .catch(this.handleError);
     }
 
+    updatePhoto(photo: Photo): Observable<Status> {
+        let body = JSON.stringify(photo);
+
+        return this.http
+            .post(this.API_END_POINT + '/updatePhoto', body, { headers: this.headers })
+            .map((res: Response) => res.json() as Status)
+            .catch(this.handleError);
+    }
+
     deleteAlbum(album:Album) {
         let body = JSON.stringify(album);
         console.log(body);
@@ -148,6 +174,15 @@ export class AppService {
             .post(this.API_END_POINT + '/deleteAlbum', body, { headers: this.headers })
             .map((res:Response) => res.json())
             .catch(this.handleError);
+    }
+
+    //DASHBOARD PAGES
+    getPages():Observable<Page[]> {
+        return this.http
+            .get(this.API_END_POINT + '/pages')
+            .map((res: Response) => res.json() as Page[])
+            .catch(this.handleError);
+            
     }
 
     private handleError(error: any): Promise<any> {

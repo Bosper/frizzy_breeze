@@ -1,0 +1,64 @@
+#contact {
+    padding-top: 115px;
+}
+
+.contact {
+    &-container {
+        position: relative;
+        width: calc(50%);
+        display: block;
+        margin: 0 auto;
+    }
+
+    &-note {
+        position: relative;
+    
+        &__el {
+            margin-top: 10px;
+            font-size: 16px;
+            letter-spacing: 1.5px;
+            line-height: 1.5;
+        }
+    }
+
+    &-info {
+        position: relative;
+        display: block;
+        padding: 0;
+        margin: auto;
+        text-align: center;
+
+        &__item {
+            font-size: 16px;
+            letter-spacing: 1px;
+            list-style: none;
+            padding: 5px;
+        }
+    }
+
+    &-form {
+        height: 390px;
+        
+        &--left {
+            position: relative;
+            display: flex;
+            height: calc(100%);
+        }
+
+        &--right {
+
+        }
+    }
+
+    &-title {
+        font-weight: 700;
+    }
+
+    &-buttons {
+        display: inline;
+        float: right;
+    }
+}
+.btn-contact {
+    width: 100px;
+}
