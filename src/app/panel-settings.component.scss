@@ -6,3 +6,55 @@
         margin: 0 auto;
     }
 }
+
+.bio-container {
+    position: relative;
+    width: calc(100%);
+    display: block;
+    margin: 0 auto;
+}
+
+.media {
+    width: 100%;
+
+    &--edit:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+}
+
+.thumb {
+    position: relative;
+    display: inline-flex;
+    justify-content: space-between;
+    width: 100%;
+
+    &__el {
+        width: calc(33%);
+        height: auto;
+        overflow: hidden;
+
+        &--edit:hover {
+            opacity: 0.5;
+            cursor: pointer;
+        }
+
+    }
+
+    &__img {
+        width: 100%;
+
+    }
+}
+
+.paragraph {
+    
+
+    &__el {
+        margin-top: 10px;
+        font-size: 16px;
+        letter-spacing: 1.5px;
+        line-height: 1.5;
+
+    }
+}

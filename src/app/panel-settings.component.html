@@ -7,10 +7,10 @@
             <h3 class="panel-title">Edit Pages</h3>
         </div>
         <div class="panel__container panel-body">
-            <div class="pages-list col-md-2">
+            <div class="pages-list col-md-1">
                 <button class="pages-list__item btn btn-default" *ngFor="let page of pages" (click)="showModel(page)">{{ page.title }}</button>
             </div>
-            <div class="col-md-10">
+            <div class="col-md-5">
                 <form [formGroup]="pageForm" *ngIf="chosenPage" (submit)="onSubmit(pageForm)">
                     <fieldset class="form-group">
                         <label for="id">ID</label>
@@ -22,6 +22,10 @@
                         <input type="text" name="title" [(ngModel)]="chosenPage.title" class="form-control" formControlName="title">
                     </fieldset>
                     <fieldset class="form-group">
+                        <label for="imgMedia">Media Image</label>
+                        <img class="media media--edit" [src]="chosenPage.imgMedia" alt="" name="imgMEdia" (click)="test(chosenPage)">
+                    </fieldset>
+                    <fieldset class="form-group">
                         <label for="paragraph1">Paragraph One</label>
                         <textarea [(ngModel)]="chosenPage.paragraph1" class="form-control" formControlName="paragraph1" name="paragraph1"></textarea>
                     </fieldset>
@@ -30,12 +34,49 @@
                         <textarea [(ngModel)]="chosenPage.paragraph2" class="form-control" formControlName="paragraph2" name="paragraph2"></textarea>
                     </fieldset>
                     <fieldset class="form-group">
+                        <label for="imgMedia">Thumbnail Images</label>
+                        <div class="thumb" name="Image Thumbs">
+                            <div class="thumb__el">
+                                <img [src]="chosenPage.imgThumb1" class="thumb__img thumb__el--edit" alt="test" (click)="test(chosenPage)">
+                            </div>
+                            <div class="thumb__el">
+                                <img [src]="chosenPage.imgThumb2" class="thumb__img thumb__el--edit" alt="test2" (click)="test(chosenPage)">
+                            </div>
+                            <div class="thumb__el">
+                                <img [src]="chosenPage.imgThumb3" class="thumb__img thumb__el--edit" alt="test3" (click)="test(chosenPage)">
+                            </div>
+                        </div>
+                    </fieldset>
+                    <fieldset class="form-group">
                         <label for="paragraph3">Paragraph Three</label>
                         <textarea [(ngModel)]="chosenPage.paragraph3" class="form-control" formControlName="paragraph3" name="paragraph3"></textarea>
                     </fieldset>
                     <input type="submit" class="btn btn-success" name="update" value="Update">
                     <input type="button" class="btn btn-default" name="reset" value="Reset">
                 </form>
+            </div>
+            <div class="col-md-6" *ngIf="chosenPage" >
+                <div class="bio-container" *ngFor="let page of pages">
+                    <img class="media" [src]="page.imgMedia" alt="">
+                    <div class="paragraph">
+                        <p class="paragraph__el">{{ page.paragraph1 }}</p>
+                        <p class="paragraph__el">{{ page.paragraph2 }}</p>
+                    </div>
+                    <div class="thumb">
+                        <div class="thumb__el thumb__el">
+                            <img [src]="page.imgThumb1" class="thumb__img" alt="test">
+                        </div>
+                        <div class="thumb__el">
+                            <img [src]="page.imgThumb2" class="thumb__img" alt="test2">
+                        </div>
+                        <div class="thumb__el">
+                            <img [src]="page.imgThumb3" class="thumb__img" alt="test3">
+                        </div>
+                    </div>
+                    <div class="paragraph">
+                        <p class="paragraph__el">{{ page.paragraph3 }}</p>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

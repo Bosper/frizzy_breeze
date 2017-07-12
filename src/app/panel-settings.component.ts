@@ -23,7 +23,11 @@ export class PanelSettingsComponent implements OnInit, AfterViewInit {
             title: new FormControl(''),
             paragraph1: new FormControl(''),
             paragraph2: new FormControl(''),
-            paragraph3: new FormControl('')
+            paragraph3: new FormControl(''),
+            imgMedia: new FormControl(''),
+            imgThumb1: new FormControl(''),
+            imgThumb2: new FormControl(''),
+            imgThumb3: new FormControl('')
         });
     }
 
@@ -40,6 +44,11 @@ export class PanelSettingsComponent implements OnInit, AfterViewInit {
     onSubmit(page:FormGroup) {
         console.log(page.value);
         console.log(page.valueChanges);
+    }
+
+    test(page: Page) {
+        alert("TEST MEDIA");
+        
     }
 
     ngOnInit() {
